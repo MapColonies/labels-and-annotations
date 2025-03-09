@@ -21,10 +21,11 @@ Defines valid values for different fields
 Merge global and local commonLabelsAndAnnotations values
 */}}
 {{- define "commonLabelsAndAnnotations.merged" -}}
-{{- if not (or (and (hasKey .Values "global") (hasKey .Values.global "commonLabelsAndAnnotations")) .Values.commonLabelsAndAnnotations) -}}
+{{- $global := default (dict) .Values.global -}}
+{{- if not (or $global.commonLabelsAndAnnotations .Values.commonLabelsAndAnnotations) -}}
     {{- fail (printf "There is no commonLabelsAndAnnotations key (locally or globally)") -}}
 {{- end -}}
-{{- $globalCommonLabelsAndAnnotations := default (dict) .Values.global.commonLabelsAndAnnotations -}}
+{{- $globalCommonLabelsAndAnnotations := default (dict) $global.commonLabelsAndAnnotations -}}
 {{- $localCommonLabelsAndAnnotations := default (dict) .Values.commonLabelsAndAnnotations -}}
 {{- $merged := merge $localCommonLabelsAndAnnotations $globalCommonLabelsAndAnnotations -}}
 {{- $merged | toYaml -}}
