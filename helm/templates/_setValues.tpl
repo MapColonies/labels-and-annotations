@@ -21,7 +21,7 @@ Defines valid values for different fields
 Merge global and local commonLabelsAndAnnotations values
 */}}
 {{- define "commonLabelsAndAnnotations.merged" -}}
-{{- if not (or .Values.global.commonLabelsAndAnnotations .Values.commonLabelsAndAnnotations) -}}
+{{- if not (or (and (hasKey .Values "global") (hasKey .Values.global "commonLabelsAndAnnotations")) .Values.commonLabelsAndAnnotations) -}}
     {{- fail (printf "There is no commonLabelsAndAnnotations key (locally or globally)") -}}
 {{- end -}}
 {{- $globalCommonLabelsAndAnnotations := default (dict) .Values.global.commonLabelsAndAnnotations -}}
