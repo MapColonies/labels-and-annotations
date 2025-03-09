@@ -1,4 +1,4 @@
-# mc-labels-and-annotations
+# common-labels-and-annotations
 
 This Helm chart provides MapColonies predefined labels and annotations through helper templates to streamline Kubernetes application deployments.
 
@@ -14,7 +14,7 @@ Add this chart as a dependency in your `Chart.yaml`:
 <!-- x-release-please-start-version -->
 ```yaml
 dependencies:
-  - name: mc-labels-and-annotations
+  - name: common-labels-and-annotations
     version: 0.1.0
     repository: oci://artifactory.io/helm/infra
 ```
@@ -32,34 +32,34 @@ Add the following to your Kubernetes manifest templates:
 ```yaml
 metadata:
   labels:
-    {{ include "mc-labels-and-annotations.labels" . | nindent 4 }}
+    {{ include "common-labels-and-annotations.labels" . | nindent 4 }}
   annotations:
-    {{ include "mc-labels-and-annotations.annotations" . | nindent 4 }}
+    {{ include "common-labels-and-annotations.annotations" . | nindent 4 }}
 ```
 
 For service component, use these functions instead:
 ```yaml
 metadata:
   labels:
-    {{ include "mc-labels-and-annotations.serviceLabels" . | nindent 4 }}
+    {{ include "common-labels-and-annotations.serviceLabels" . | nindent 4 }}
   annotations:
-    {{ include "mc-labels-and-annotations.serviceAnnotations" . | nindent 4 }}
+    {{ include "common-labels-and-annotations.serviceAnnotations" . | nindent 4 }}
 ```
 
 ### Configuration
-Define "mcLabels" in `values.yaml`. Values can be set globally or overridden locally:
+Define "commonLabelsAndAnnotations" in `values.yaml`. Values can be set globally or overridden locally:
 
 ```yaml
 global:
-  mcLabels:
+  commonLabelsAndAnnotations:
     environment: "development"
     createdBy: "Person"
     component: "infrastructure"
     partOf: "Monitoring"
 
-mcLabels:
-  component: "backend" # Overrides global.mcLabels.component
-  owner: "3d" # Overrides global.mcLabels.owner
+commonLabelsAndAnnotations:
+  component: "backend" # Overrides global.commonLabelsAndAnnotations.component
+  owner: "3d" # Overrides global.commonLabelsAndAnnotations.owner
 ```
 
 ### Validation Rules
@@ -80,8 +80,8 @@ The chart validates the following metadata fields:
 
 ### File Structure
 - `templates/_helpers.tpl`: Contains helper functions for generating labels and annotations.
-- `templates/_setValues.tpl`: Contains functions for merging and setting mcLabels values.
-- `templates/_validations.tpl`: Contains validation functions for mcLabels values.
+- `templates/_setValues.tpl`: Contains functions for merging and setting commonLabelsAndAnnotations values.
+- `templates/_validations.tpl`: Contains validation functions for commonLabelsAndAnnotations values.
 
 ### Adding New Labels Or Annotations
 1. Add the labels or annotations in `templates/_helpers.tpl`.

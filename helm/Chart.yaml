@@ -1,5 +1,5 @@
 apiVersion: v2
-name: mc-labels-and-annotations
+name: common-labels-and-annotations
 description: A MapColonies' helm library chart for creating and validating Kubernetes labels and annotations.
 type: library
 version: 0.1.0

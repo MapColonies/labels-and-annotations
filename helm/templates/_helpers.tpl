@@ -4,15 +4,15 @@ Create common labels for all kubernetes components
 {{- define "generalLabels" -}}
 {{- include "validateGeneral" . }}
 {{- include "selectorLabels" . }}
-{{ $mcLabels := fromYaml (include "mcLabels.merged" .) -}}
-app.kubernetes.io/part-of: {{ $mcLabels.partOf }}
-mapcolonies.io/owner: {{ $mcLabels.owner }}
-app.kubernetes.io/created-by: {{ $mcLabels.createdBy }}
-{{- if hasKey $mcLabels "releaseVersion" }}
-mapcolonies.io/release-version: {{ $mcLabels.releaseVersion }}
+{{ $commonLabelsAndAnnotations := fromYaml (include "commonLabelsAndAnnotations.merged" .) -}}
+app.kubernetes.io/part-of: {{ $commonLabelsAndAnnotations.partOf }}
+mapcolonies.io/owner: {{ $commonLabelsAndAnnotations.owner }}
+app.kubernetes.io/created-by: {{ $commonLabelsAndAnnotations.createdBy }}
+{{- if hasKey $commonLabelsAndAnnotations "releaseVersion" }}
+mapcolonies.io/release-version: {{ $commonLabelsAndAnnotations.releaseVersion }}
 {{- end -}}
-{{ if hasKey $mcLabels "gisDomain" }}
-mapcolonies.io/gis-domain: {{ $mcLabels.gisDomain }}
+{{ if hasKey $commonLabelsAndAnnotations "gisDomain" }}
+mapcolonies.io/gis-domain: {{ $commonLabelsAndAnnotations.gisDomain }}
 {{- end -}}
 {{- end }}
 
@@ -26,26 +26,26 @@ Create common annotations for all kubernetes components
 Create common labels for all kubernetes components
 */}}
 {{- define "selectorLabels" -}}
-{{- $mcLabels := fromYaml (include "mcLabels.merged" .) -}}
-mapcolonies.io/environment: {{ $mcLabels.environment }}
+{{- $commonLabelsAndAnnotations := fromYaml (include "commonLabelsAndAnnotations.merged" .) -}}
+mapcolonies.io/environment: {{ $commonLabelsAndAnnotations.environment }}
 {{- end }}
 
 {{/*
 Create common labels for all kubernetes components besides service.
 It includes also the common labels from "generalLabels" function
 */}}
-{{- define "mc-labels-and-annotations.labels" -}}
+{{- define "common-labels-and-annotations.labels" -}}
 {{- include "validate" . }}
-{{- $mcLabels := fromYaml (include "mcLabels.merged" .) -}}
+{{- $commonLabelsAndAnnotations := fromYaml (include "commonLabelsAndAnnotations.merged" .) -}}
 {{- include "generalLabels" . }}
-app.kubernetes.io/component: {{ $mcLabels.component }}
+app.kubernetes.io/component: {{ $commonLabelsAndAnnotations.component }}
 {{- end }}
 
 {{/*
 Create common annotations for all kubernetes components besides service.
 It includes also the common annotations from "generalAnnotations" function
 */}}
-{{- define "mc-labels-and-annotations.annotations" -}}
+{{- define "common-labels-and-annotations.annotations" -}}
 {{- include "generalAnnotations" . }}
 {{- end }}
 
@@ -53,7 +53,7 @@ It includes also the common annotations from "generalAnnotations" function
 Create common labels for kubernetes service component.
 It includes also the common labels from "generalLabels" function
 */}}
-{{- define "mc-labels-and-annotations.serviceLabels" -}}
+{{- define "common-labels-and-annotations.serviceLabels" -}}
 {{- include "generalLabels" . }}
 {{- end }}
 
@@ -61,6 +61,6 @@ It includes also the common labels from "generalLabels" function
 Create common annotations for kubernetes service component.
 It includes also the common annotations from "generalAnnotations" function
 */}}
-{{- define "mc-labels-and-annotations.serviceAnnotations" -}}
+{{- define "common-labels-and-annotations.serviceAnnotations" -}}
 {{- include "generalAnnotations" . }}
 {{- end }}
