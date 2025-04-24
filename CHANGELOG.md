@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.1.0...v0.2.0) (2025-04-24)
+
+
+### Features
+
+* remove createdBy ([#7](https://github.com/MapColonies/labels-and-annotations/issues/7)) ([66689b2](https://github.com/MapColonies/labels-and-annotations/commit/66689b2a48c120b690f658fca9f846d2d46011d0))
+
 ## 0.1.0 (2025-03-09)
 
 
