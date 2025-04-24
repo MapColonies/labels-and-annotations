@@ -7,9 +7,6 @@ Validates commonLabelsAndAnnotations values needed for general labels and annota
 {{- if not (hasKey $commonLabelsAndAnnotations "environment") -}}
     {{- fail "There is no environment key in commonLabelsAndAnnotations" -}}
 {{- end -}}
-{{- if not (hasKey $commonLabelsAndAnnotations "createdBy") -}}
-    {{- fail "There is no createdBy key in commonLabelsAndAnnotations" -}}
-{{- end -}}
 {{- if not (hasKey $commonLabelsAndAnnotations "partOf") -}}
     {{- fail "There is no partOf key in commonLabelsAndAnnotations" -}}
 {{- end -}}
