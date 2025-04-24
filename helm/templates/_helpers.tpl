@@ -7,7 +7,6 @@ Create common labels for all kubernetes components
 {{ $commonLabelsAndAnnotations := fromYaml (include "commonLabelsAndAnnotations.merged" .) -}}
 app.kubernetes.io/part-of: {{ $commonLabelsAndAnnotations.partOf }}
 mapcolonies.io/owner: {{ $commonLabelsAndAnnotations.owner }}
-app.kubernetes.io/created-by: {{ $commonLabelsAndAnnotations.createdBy }}
 {{- if hasKey $commonLabelsAndAnnotations "releaseVersion" }}
 mapcolonies.io/release-version: {{ $commonLabelsAndAnnotations.releaseVersion }}
 {{- end -}}
