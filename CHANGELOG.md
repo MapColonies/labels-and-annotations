@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.2.0...v0.3.0) (2025-04-24)
+
+
+### Features
+
+* add dependabot ([#9](https://github.com/MapColonies/labels-and-annotations/issues/9)) ([1228611](https://github.com/MapColonies/labels-and-annotations/commit/12286118e89054d272c9264a8a1cc37ab14796d8))
+
 ## [0.2.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.1.0...v0.2.0) (2025-04-24)
 
 
