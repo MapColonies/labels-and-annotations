@@ -54,7 +54,7 @@ global:
   commonLabelsAndAnnotations:
     environment: "development"
     component: "infrastructure"
-    partOf: "Monitoring"
+    partOf: "monitoring"
 
 commonLabelsAndAnnotations:
   component: "backend" # Overrides global.commonLabelsAndAnnotations.component
@@ -67,7 +67,7 @@ The chart validates the following metadata fields:
 
 | Field | Required | Valid Values | Notes |
 |----------------|----------|---------------------|----|
-| environment | Yes | development, production,stage | |
+| environment | Yes | development, production, stage | |
 | component | Yes | frontend, backend, database, proxy-server, cache-server, infrastructure | Optional when deploying service |
 | partOf | Yes | non-empty string | |
 | owner | Yes | vector, raster, 3d, app, dem, infra, common | Who is the owner of the deployment |
