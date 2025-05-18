@@ -63,3 +63,13 @@ It includes also the common annotations from "generalAnnotations" function
 {{- define "common-labels-and-annotations.serviceAnnotations" -}}
 {{- include "generalAnnotations" . }}
 {{- end }}
+
+{{/*
+Create prometheus annotations for enabling metrics
+*/}}
+{{- define "common-labels-and-annotations.metricsAnnotations" -}}
+{{- $commonLabelsAndAnnotations := fromYaml (include "commonLabelsAndAnnotations.merged" .) -}}
+prometheus.io/scrape: "true"
+prometheus.io/port: {{ coalesce $commonLabelsAndAnnotations.metricsPort "8080" | quote }}
+prometheus.io/path: {{ coalesce $commonLabelsAndAnnotations.metricsPath "/metrics" | quote }}
+{{- end }}
