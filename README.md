@@ -54,6 +54,14 @@ YOUR CODE
 {{- end }}
 ```
 
+If you want to add also metrics related annotations for enabling prometheus scraping, use this function:
+```yaml
+metadata:
+  annotations:
+    {{ include "common-labels-and-annotations.metricsAnnotations" . | nindent 4 }}
+```
+This will add the metrics annotations to your deployment and allow prometheus to scrape it. Don't forget to change the metrics configuration in values if needed(See the metadata fields below).
+
 ### Configuration
 Define "commonLabelsAndAnnotations" in `values.yaml`. Values can be set globally or overridden locally:
 
@@ -81,6 +89,8 @@ The chart validates the following metadata fields:
 | owner | Yes | vector, raster, 3d, app, dem, infra, common | Who is the owner of the deployment |
 | gisDomain | No | vector, raster, 3d, dem, terrain-analysis | To what GIS domain it is related |
 | releaseVersion | No | semantic version (e.g., v1.0.0) | The MapColonies project product version |
+| metricsPort | No | port number | The port on which the metrics are exposed (8080 as default) |
+| metricsPath | No | url path | The path on which the metrics are exposed (/metrics as default) |
 
 ## Maintainers
 
