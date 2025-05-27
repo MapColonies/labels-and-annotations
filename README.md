@@ -27,23 +27,31 @@ helm dependency update
 ## Usage
 
 ### Template Integration
-Add the following to your Kubernetes manifest templates:
+Add these functions `{{ include "common-labels-and-annotations.labels" . }}` and `{{ include "common-labels-and-annotations.selectorLabels" . }}` to your labels and selectorLabels functions respectively under `_helpers.tpl` file:
 
 ```yaml
-metadata:
-  labels:
-    {{ include "common-labels-and-annotations.labels" . | nindent 4 }}
-  annotations:
-    {{ include "common-labels-and-annotations.annotations" . | nindent 4 }}
+{{/*
+Common labels
+*/}}
+{{- define "CHART-NAME.labels" -}}
+...
+YOUR CODE
+...
+{{ include "common-labels-and-annotations.labels" . }}
+{{- end }}
 ```
 
-For service component, use these functions instead:
 ```yaml
-metadata:
-  labels:
-    {{ include "common-labels-and-annotations.serviceLabels" . | nindent 4 }}
-  annotations:
-    {{ include "common-labels-and-annotations.serviceAnnotations" . | nindent 4 }}
+{{/*
+Selector labels
+*/}}
+{{- define "CHART-NAME.selectorLabels" -}}
+...
+YOUR CODE
+...
+
+{{ include "common-labels-and-annotations.selectorLabels" . }}
+{{- end }}
 ```
 
 If you want to add also annotations for enabling prometheus scraping, use this function:
@@ -76,7 +84,7 @@ The chart validates the following metadata fields:
 | Field | Required | Valid Values | Notes |
 |----------------|----------|---------------------|----|
 | environment | Yes | development, production, stage | |
-| component | Yes | frontend, backend, database, proxy-server, cache-server, infrastructure | Optional when deploying service |
+| component | Yes | frontend, backend, database, proxy-server, cache-server, infrastructure | |
 | partOf | Yes | non-empty string | |
 | owner | Yes | vector, raster, 3d, app, dem, infra, common | Who is the owner of the deployment |
 | gisDomain | No | vector, raster, 3d, dem, terrain-analysis | To what GIS domain it is related |
@@ -97,12 +105,3 @@ The chart validates the following metadata fields:
 ### Adding New Validations
 1. Define valid values in `templates/_setValues.tpl`.
 2. Add validation logic in `templates/_validations.tpl`.
-
-### Updating the Chart Version
-1. Update the version in `Chart.yaml`.
-2. Update the version in the `README.md` installation instructions.
-
-### Testing Changes
-1. Make changes to the templates.
-2. Run `helm lint` to validate the chart.
-3. Deploy the chart in a test environment to ensure it works as expected.
