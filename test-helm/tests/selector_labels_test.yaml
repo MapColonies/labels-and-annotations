@@ -1,0 +1,62 @@
+suite: test selector labels
+templates:
+  - deployment.yaml # Using a deployment to check its selector and pod template labels
+tests:
+  - it: Should render default selectorLabels correctly
+    set:
+      commonLabelsAndAnnotations:
+        environment: development
+        component: backend # Required for 'common-labels-and-annotations.labels'
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - isKind:
+          of: Deployment
+      # Check the selector labels on the Deployment
+      - equal:
+          path: spec.selector.matchLabels["mapcolonies.io/environment"]
+          value: development
+      # Check the labels on the Pod template, which should include selectorLabels via generalLabels
+      - equal:
+          path: spec.template.metadata.labels["mapcolonies.io/environment"]
+          value: development
+      
+  - it: selectorLabels should use global values if local are not set
+    set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: production
+      commonLabelsAndAnnotations:
+        # environment: development # Intentionally not set locally
+        component: backend
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - isKind:
+          of: Deployment
+      - equal:
+          path: spec.selector.matchLabels["mapcolonies.io/environment"]
+          value: production # Should come from global
+      - equal:
+          path: spec.template.metadata.labels["mapcolonies.io/environment"]
+          value: production # Should come from global
+
+  - it: selectorLabels should use local values to override global
+    set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: production
+      commonLabelsAndAnnotations:
+        environment: development # Local override
+        component: backend
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - isKind:
+          of: Deployment
+      - equal:
+          path: spec.selector.matchLabels["mapcolonies.io/environment"]
+          value: development # Local should override global
+      - equal:
+          path: spec.template.metadata.labels["mapcolonies.io/environment"]
+          value: development # Local should override global
