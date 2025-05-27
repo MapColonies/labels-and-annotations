@@ -54,7 +54,7 @@ YOUR CODE
 {{- end }}
 ```
 
-If you want to add also annotations for enabling prometheus scraping, use this function:
+If you want to add also metrics related annotations for enabling prometheus scraping, use this function:
 ```yaml
 metadata:
   annotations:
