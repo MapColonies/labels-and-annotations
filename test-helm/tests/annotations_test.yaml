@@ -8,7 +8,6 @@ tests:
         environment: development
         component: backend
         partOf: myApplication
-        owner: infra
     asserts:
       - isKind:
           of: Deployment
