@@ -111,4 +111,3 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: "There is no commonLabelsAndAnnotations key (locally or globally)"
- 
