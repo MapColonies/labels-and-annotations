@@ -1,8 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/helm-unittest/helm-unittest/main/schema/helm-testsuite.json
 suite: test selector labels
-templates:
-  - deployment.yaml # Using a deployment to check its selector and pod template labels
 tests:
-  - it: Should render default selectorLabels correctly
+  - it: Should render selector labels correctly
     set:
       commonLabelsAndAnnotations:
         environment: development
@@ -10,15 +9,19 @@ tests:
         partOf: myApplication
         owner: infra
     asserts:
-      - isKind:
-          of: Deployment
       # Check the selector labels on the Deployment
-      - equal:
+      - template: deployment.yaml
+        equal:
           path: spec.selector.matchLabels["mapcolonies.io/environment"]
           value: development
-      # Check the labels on the Pod template, which should include selectorLabels via generalLabels
-      - equal:
+      - template: deployment.yaml
+        equal:
           path: spec.template.metadata.labels["mapcolonies.io/environment"]
+          value: development
+      # Check the selector labels on the Service
+      - template: service.yaml
+        equal:
+          path: spec.selector["mapcolonies.io/environment"]
           value: development
       
   - it: selectorLabels should use global values if local are not set
@@ -32,13 +35,19 @@ tests:
         partOf: myApplication
         owner: infra
     asserts:
-      - isKind:
-          of: Deployment
-      - equal:
+      # Check the selector labels on the Deployment
+      - template: deployment.yaml
+        equal:
           path: spec.selector.matchLabels["mapcolonies.io/environment"]
           value: production # Should come from global
-      - equal:
+      - template: deployment.yaml
+        equal:
           path: spec.template.metadata.labels["mapcolonies.io/environment"]
+          value: production # Should come from global
+      # Check the selector labels on the Service
+      - template: service.yaml
+        equal:
+          path: spec.selector["mapcolonies.io/environment"]
           value: production # Should come from global
 
   - it: selectorLabels should use local values to override global
@@ -52,11 +61,17 @@ tests:
         partOf: myApplication
         owner: infra
     asserts:
-      - isKind:
-          of: Deployment
-      - equal:
+      # Check the selector labels on the Deployment
+      - template: deployment.yaml
+        equal:
           path: spec.selector.matchLabels["mapcolonies.io/environment"]
           value: development # Local should override global
-      - equal:
+      - template: deployment.yaml
+        equal:
           path: spec.template.metadata.labels["mapcolonies.io/environment"]
+          value: development # Local should override global
+      # Check the selector labels on the Service
+      - template: service.yaml
+        equal:
+          path: spec.selector["mapcolonies.io/environment"]
           value: development # Local should override global

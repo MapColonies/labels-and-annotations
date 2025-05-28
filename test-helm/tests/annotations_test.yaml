@@ -1,8 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/helm-unittest/helm-unittest/main/schema/helm-testsuite.json
 suite: test annotations
 tests:
-  - it: Should render default annotations (currently none)
-    template: deployment.yaml
+  - it: Should render annotations (currently none)
     set:
       commonLabelsAndAnnotations: # Need this block to pass general validation
         environment: development
@@ -10,17 +9,9 @@ tests:
         partOf: myApplication
         owner: infra
     asserts:
-      - isKind:
+      - template: deployment.yaml
+        isKind:
           of: Deployment
-
-  - it: Should render default annotations (currently none)
-    template: service.yaml
-    set:
-      commonLabelsAndAnnotations: # Need this block to pass general validation
-        environment: development
-        component: backend
-        partOf: myApplication
-        owner: infra
-    asserts:
-      - isKind:
+      - template: service.yaml
+        isKind:
           of: Service

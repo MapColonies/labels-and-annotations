@@ -1,10 +1,7 @@
-# helm/tests/labels_test.yaml
-# Test cases for label generation
-
+# yaml-language-server: $schema=https://raw.githubusercontent.com/helm-unittest/helm-unittest/main/schema/helm-testsuite.json
 suite: test labels
 tests:
-  - it: Should render default labels correctly
-    template: deployment.yaml
+  - it: Should render labels correctly
     set:
       commonLabelsAndAnnotations:
         environment: development
@@ -12,8 +9,6 @@ tests:
         partOf: myApplication
         owner: infra
     asserts:
-      - isKind:
-          of: Deployment
       - equal:
           path: metadata.labels["mapcolonies.io/environment"]
           value: development
@@ -32,7 +27,6 @@ tests:
           path: metadata.labels["mapcolonies.io/gis-domain"] # Not set by default
 
   - it: Should render labels with global overrides
-    template: deployment.yaml
     set:
       global:
         commonLabelsAndAnnotations:
@@ -45,8 +39,6 @@ tests:
         partOf: myApplication # This should override global.partOf
         owner: vector # This should override global.owner
     asserts:
-      - isKind:
-          of: Deployment
       - equal:
           path: metadata.labels["mapcolonies.io/environment"]
           value: production # From global
@@ -61,7 +53,6 @@ tests:
           value: vector # Local overrides global
 
   - it: Should render labels with optional fields
-    template: deployment.yaml
     set:
       commonLabelsAndAnnotations:
         environment: stage
@@ -71,8 +62,6 @@ tests:
         releaseVersion: v1.2.3
         gisDomain: 3d
     asserts:
-      - isKind:
-          of: Deployment
       - equal:
           path: metadata.labels["mapcolonies.io/environment"]
           value: stage
@@ -91,25 +80,3 @@ tests:
       - equal:
           path: metadata.labels["mapcolonies.io/gis-domain"]
           value: 3d
-
-  - it: Should render service labels correctly
-    templates:
-      - service.yaml
-    set:
-      commonLabelsAndAnnotations:
-        environment: development
-        partOf: myServiceApp
-        component: frontend
-        owner: app
-    asserts:
-      - isKind:
-          of: Service
-      - equal:
-          path: metadata.labels["mapcolonies.io/environment"]
-          value: development
-      - equal:
-          path: metadata.labels["app.kubernetes.io/part-of"]
-          value: myServiceApp
-      - equal:
-          path: metadata.labels["mapcolonies.io/owner"]
-          value: app

@@ -1,7 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/helm-unittest/helm-unittest/main/schema/helm-testsuite.json
 suite: test validations
-templates:
-  - deployment.yaml # Use a dummy deployment to trigger validations
 tests:
   - it: Should fail if environment is missing
     set:
@@ -33,7 +31,7 @@ tests:
       - failedTemplate:
           errorMessage: "There is no owner key in commonLabelsAndAnnotations"
 
-  - it: Should fail if component is missing (for non-service)
+  - it: Should fail if component is missing
     set:
       commonLabelsAndAnnotations:
         environment: development
@@ -98,8 +96,6 @@ tests:
           owner: infra
       # commonLabelsAndAnnotations: {} # Intentionally missing locally
     asserts:
-      - isKind:
-          of: Deployment
       - equal:
           path: metadata.labels["mapcolonies.io/environment"]
           value: development
