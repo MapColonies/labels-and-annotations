@@ -2,6 +2,10 @@ name: Pull Request
 
 on: pull_request
 
+permissions:
+  checks: write
+  pull-requests: write # only required if `comment: true` was enabled
+
 jobs:
   helm-test:
     runs-on: ubuntu-latest
@@ -25,3 +29,5 @@ jobs:
         if: success() || failure() # always run even if the previous step fails
         with:
           report_paths: '**/reports/*.xml'
+          token: ${{ secrets.GH_PAT }}
+          comment: true
