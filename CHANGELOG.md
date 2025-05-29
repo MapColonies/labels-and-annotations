@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.4.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.3.0...v0.4.0) (2025-05-29)
+
+
+### Features
+
+* add metrics annotations ([#13](https://github.com/MapColonies/labels-and-annotations/issues/13)) ([dddbf66](https://github.com/MapColonies/labels-and-annotations/commit/dddbf668207db8fe1e5b9d506e5ca550a196458b))
+* add tests ([#16](https://github.com/MapColonies/labels-and-annotations/issues/16)) ([1f8e10a](https://github.com/MapColonies/labels-and-annotations/commit/1f8e10a70f02ebca256850380b4b1f587347c03d))
+* undo excluding service from other components ([#14](https://github.com/MapColonies/labels-and-annotations/issues/14)) ([097fc00](https://github.com/MapColonies/labels-and-annotations/commit/097fc00f1bdc5b017e58f06a1e60c1f17e7816cd))
+
 ## [0.3.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.2.0...v0.3.0) (2025-04-24)
 
 

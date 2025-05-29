@@ -15,7 +15,7 @@ Add this chart as a dependency in your `Chart.yaml`:
 ```yaml
 dependencies:
   - name: common-labels-and-annotations
-    version: 0.3.0
+    version: 0.4.0
     repository: oci://artifactory.io/helm/infra
 ```
 <!-- x-release-please-end-version -->
