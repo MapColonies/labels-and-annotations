@@ -1,0 +1,16 @@
+suite: test annotations
+tests:
+  - it: Should render annotations (currently none)
+    set:
+      commonLabelsAndAnnotations: # Need this block to pass general validation
+        environment: development
+        component: backend
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - template: deployment.yaml
+        isKind:
+          of: Deployment
+      - template: service.yaml
+        isKind:
+          of: Service

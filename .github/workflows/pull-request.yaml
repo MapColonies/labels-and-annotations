@@ -1,0 +1,33 @@
+name: Pull Request
+
+on: pull_request
+
+permissions:
+  checks: write
+  pull-requests: write # only required if `comment: true` was enabled
+
+jobs:
+  helm-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+          
+      - name: Install helm unittest plugin
+        run: helm plugin install https://github.com/helm-unittest/helm-unittest
+        
+      - name: Install Chart Dependencies
+        run: helm dependency update test-helm
+      
+      - name: Run Helm unit tests
+        run: helm unittest test-helm -t JUnit -o reports/test.xml
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v5
+        if: success() || failure() # always run even if the previous step fails
+        with:
+          report_paths: '**/reports/*.xml'
+          token: ${{ secrets.GH_PAT }}
+          comment: true

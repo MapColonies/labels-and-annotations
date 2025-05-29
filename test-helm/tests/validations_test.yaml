@@ -1,0 +1,108 @@
+suite: test validations
+tests:
+  - it: Should fail if environment is missing
+    set:
+      commonLabelsAndAnnotations:
+        component: backend
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - failedTemplate:
+          errorMessage: "There is no environment key in commonLabelsAndAnnotations"
+
+  - it: Should fail if partOf is missing
+    set:
+      commonLabelsAndAnnotations:
+        environment: development
+        component: backend
+        owner: infra
+    asserts:
+      - failedTemplate:
+          errorMessage: "There is no partOf key in commonLabelsAndAnnotations"
+
+  - it: Should fail if owner is missing
+    set:
+      commonLabelsAndAnnotations:
+        environment: development
+        component: backend
+        partOf: myApplication
+    asserts:
+      - failedTemplate:
+          errorMessage: "There is no owner key in commonLabelsAndAnnotations"
+
+  - it: Should fail if component is missing
+    set:
+      commonLabelsAndAnnotations:
+        environment: development
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - failedTemplate:
+          errorMessage: "There is no component key in commonLabelsAndAnnotations"
+
+  - it: Should fail for invalid environment value
+    set:
+      commonLabelsAndAnnotations:
+        environment: "invalid-env"
+        component: backend
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - failedTemplate:
+          errorPattern: "Provided: invalid-env"
+
+  - it: Should fail for invalid component value
+    set:
+      commonLabelsAndAnnotations:
+        environment: development
+        component: "invalid-component"
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - failedTemplate:
+          errorPattern: "Provided: invalid-component."
+
+  - it: Should fail for invalid owner value
+    set:
+      commonLabelsAndAnnotations:
+        environment: development
+        component: backend
+        partOf: myApplication
+        owner: "invalid-owner"
+    asserts:
+      - failedTemplate:
+          errorPattern: "Provided: invalid-owner"
+
+  - it: Should fail for invalid gisDomain value
+    set:
+      commonLabelsAndAnnotations:
+        environment: development
+        component: backend
+        partOf: myApplication
+        owner: infra
+        gisDomain: "invalid-gis"
+    asserts:
+      - failedTemplate: 
+          errorPattern: "Provided: invalid-gis"
+
+  - it: Should pass if commonLabelsAndAnnotations is missing locally but present globally
+    set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development
+          component: backend
+          partOf: myApplication
+          owner: infra
+      # commonLabelsAndAnnotations: {} # Intentionally missing locally
+    asserts:
+      - equal:
+          path: metadata.labels["mapcolonies.io/environment"]
+          value: development
+
+  - it: Should fail if commonLabelsAndAnnotations is missing locally AND globally
+    set:
+      global: {}
+      # commonLabelsAndAnnotations: {} # Intentionally missing locally
+    asserts:
+      - failedTemplate:
+          errorMessage: "There is no commonLabelsAndAnnotations key (locally or globally)"
