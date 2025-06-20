@@ -12,10 +12,10 @@ tests:
           path: metadata.labels["mapcolonies.io/environment"]
           value: development
       - equal:
-          path: metadata.labels["app.kubernetes.io/component"]
+          path: metadata.labels["mapcolonies.io/component"]
           value: backend
       - equal:
-          path: metadata.labels["app.kubernetes.io/part-of"]
+          path: metadata.labels["mapcolonies.io/part-of"]
           value: myApplication
       - equal:
           path: metadata.labels["mapcolonies.io/owner"]
@@ -42,10 +42,10 @@ tests:
           path: metadata.labels["mapcolonies.io/environment"]
           value: production # From global
       - equal:
-          path: metadata.labels["app.kubernetes.io/component"]
+          path: metadata.labels["mapcolonies.io/component"]
           value: backend # Local overrides global
       - equal:
-          path: metadata.labels["app.kubernetes.io/part-of"]
+          path: metadata.labels["mapcolonies.io/part-of"]
           value: myApplication # Local overrides global
       - equal:
           path: metadata.labels["mapcolonies.io/owner"]
@@ -65,10 +65,10 @@ tests:
           path: metadata.labels["mapcolonies.io/environment"]
           value: stage
       - equal:
-          path: metadata.labels["app.kubernetes.io/component"]
+          path: metadata.labels["mapcolonies.io/component"]
           value: frontend
       - equal:
-          path: metadata.labels["app.kubernetes.io/part-of"]
+          path: metadata.labels["mapcolonies.io/part-of"]
           value: anotherApp
       - equal:
           path: metadata.labels["mapcolonies.io/owner"]
