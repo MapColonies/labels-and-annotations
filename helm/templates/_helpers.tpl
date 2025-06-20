@@ -12,9 +12,9 @@ Create common labels for all kubernetes components
 {{- define "common-labels-and-annotations.labels" -}}
 {{- include "validate" . }}
 {{- $commonLabelsAndAnnotations := fromYaml (include "commonLabelsAndAnnotations.merged" .) -}}
-app.kubernetes.io/part-of: {{ $commonLabelsAndAnnotations.partOf }}
+mapcolonies.io/part-of: {{ $commonLabelsAndAnnotations.partOf }}
 mapcolonies.io/owner: {{ $commonLabelsAndAnnotations.owner }}
-app.kubernetes.io/component: {{ $commonLabelsAndAnnotations.component }}
+mapcolonies.io/component: {{ $commonLabelsAndAnnotations.component }}
 {{- if hasKey $commonLabelsAndAnnotations "releaseVersion" }}
 mapcolonies.io/release-version: {{ $commonLabelsAndAnnotations.releaseVersion }}
 {{- end -}}
