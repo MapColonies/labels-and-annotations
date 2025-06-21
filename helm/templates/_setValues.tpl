@@ -27,6 +27,21 @@ Merge global and local commonLabelsAndAnnotations values
 {{- end -}}
 {{- $globalCommonLabelsAndAnnotations := default (dict) $global.commonLabelsAndAnnotations -}}
 {{- $localCommonLabelsAndAnnotations := default (dict) .Values.commonLabelsAndAnnotations -}}
+
+{{- if not (hasKey $globalCommonLabelsAndAnnotations "environment") -}}
+  {{- fail (printf "The required key 'environment' is missing in global.commonLabelsAndAnnotations") -}}
+{{- end -}}
+
+{{- $forbiddenKeys := list "partOf" "owner" "component" -}}
+{{- range $key := $forbiddenKeys -}}
+  {{- if hasKey $globalCommonLabelsAndAnnotations $key -}}
+    {{- fail (printf "Forbidden key '%s' found in global.commonLabelsAndAnnotations. It must only be defined locally." $key) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $allowedGlobal := dict -}}
+{{- $_ := set $allowedGlobal "environment" (get $globalCommonLabelsAndAnnotations "environment") -}}
+
 {{- $merged := merge $localCommonLabelsAndAnnotations $globalCommonLabelsAndAnnotations -}}
 {{- $merged | toYaml -}}
 {{- end -}}
