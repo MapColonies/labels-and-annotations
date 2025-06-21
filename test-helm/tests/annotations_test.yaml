@@ -2,8 +2,10 @@ suite: test annotations
 tests:
   - it: Should render annotations (currently none)
     set:
-      commonLabelsAndAnnotations: # Need this block to pass general validation
-        environment: development
+      global: 
+       commonLabelsAndAnnotations: # Need this block to pass general validation
+        environment: development       
+      commonLabelsAndAnnotations:
         component: backend
         partOf: myApplication
         owner: infra

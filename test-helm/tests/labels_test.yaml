@@ -2,8 +2,10 @@ suite: test labels
 tests:
   - it: Should render labels correctly
     set:
+      global:
+        commonLabelsAndAnnotations:
+            environment: development      
       commonLabelsAndAnnotations:
-        environment: development
         component: backend
         partOf: myApplication
         owner: infra
@@ -30,9 +32,6 @@ tests:
       global:
         commonLabelsAndAnnotations:
           environment: production
-          component: global-backend
-          partOf: global-app
-          owner: common
       commonLabelsAndAnnotations:
         component: backend # This should override global.component
         partOf: myApplication # This should override global.partOf
@@ -53,8 +52,10 @@ tests:
 
   - it: Should render labels with optional fields
     set:
+      global:
+        commonLabelsAndAnnotations:
+            environment: stage
       commonLabelsAndAnnotations:
-        environment: stage
         component: frontend
         partOf: anotherApp
         owner: raster

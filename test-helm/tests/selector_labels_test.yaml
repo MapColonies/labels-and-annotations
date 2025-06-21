@@ -2,8 +2,10 @@ suite: test selector labels
 tests:
   - it: Should render selector labels correctly
     set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development      
       commonLabelsAndAnnotations:
-        environment: development
         component: backend # Required for 'common-labels-and-annotations.labels'
         partOf: myApplication
         owner: infra

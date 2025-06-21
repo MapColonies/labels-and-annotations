@@ -1,6 +1,6 @@
 dependencies:
 - name: common-labels-and-annotations
   repository: file://../helm
-  version: 0.3.0
-digest: sha256:da1ed04b20e7548792edb14adc35e81836de5507d39ceafe21adcadd81f01a7c
-generated: "2025-05-18T16:49:52.952833945+03:00"
+  version: 0.4.0
+digest: sha256:e703dc15e818e157f462a4b7d917855b21f932395ebee827b27d50ef797e5278
+generated: "2025-06-21T13:59:25.822679+03:00"

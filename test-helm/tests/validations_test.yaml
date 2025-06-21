@@ -8,12 +8,14 @@ tests:
         owner: infra
     asserts:
       - failedTemplate:
-          errorMessage: "There is no environment key in commonLabelsAndAnnotations"
+          errorMessage: "The required key 'environment' is missing in global.commonLabelsAndAnnotations"
 
   - it: Should fail if partOf is missing
     set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development
       commonLabelsAndAnnotations:
-        environment: development
         component: backend
         owner: infra
     asserts:
@@ -22,8 +24,10 @@ tests:
 
   - it: Should fail if owner is missing
     set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development    
       commonLabelsAndAnnotations:
-        environment: development
         component: backend
         partOf: myApplication
     asserts:
@@ -32,8 +36,10 @@ tests:
 
   - it: Should fail if component is missing
     set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development    
       commonLabelsAndAnnotations:
-        environment: development
         partOf: myApplication
         owner: infra
     asserts:
@@ -42,8 +48,10 @@ tests:
 
   - it: Should fail for invalid environment value
     set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: "invalid-env"        
       commonLabelsAndAnnotations:
-        environment: "invalid-env"
         component: backend
         partOf: myApplication
         owner: infra
@@ -53,19 +61,23 @@ tests:
 
   - it: Should fail for invalid component value
     set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development  
       commonLabelsAndAnnotations:
-        environment: development
         component: "invalid-component"
         partOf: myApplication
         owner: infra
     asserts:
       - failedTemplate:
-          errorPattern: "Provided: invalid-component."
+          errorPattern: "Provided: invalid-component."       
 
   - it: Should fail for invalid owner value
     set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development     
       commonLabelsAndAnnotations:
-        environment: development
         component: backend
         partOf: myApplication
         owner: "invalid-owner"
@@ -73,10 +85,42 @@ tests:
       - failedTemplate:
           errorPattern: "Provided: invalid-owner"
 
+  - it: Should fail if owner is defined in global.commonLabelsAndAnnotations
+    set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development
+          owner: "owner"
+    asserts:
+      - failedTemplate:
+          errorPattern: "Forbidden key 'owner'"          
+
+  - it: Should fail if component is defined in global.commonLabelsAndAnnotations
+    set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development
+          component: "component"
+    asserts:
+      - failedTemplate:
+          errorPattern: "Forbidden key 'component'"
+
+  - it: Should fail if partOf is defined in global.commonLabelsAndAnnotations
+    set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development
+          partOf: "partOf"
+    asserts:
+      - failedTemplate:
+          errorPattern: "Forbidden key 'partOf'"
+
   - it: Should fail for invalid gisDomain value
     set:
+      global:
+        commonLabelsAndAnnotations:
+          environment: development     
       commonLabelsAndAnnotations:
-        environment: development
         component: backend
         partOf: myApplication
         owner: infra
@@ -84,20 +128,6 @@ tests:
     asserts:
       - failedTemplate: 
           errorPattern: "Provided: invalid-gis"
-
-  - it: Should pass if commonLabelsAndAnnotations is missing locally but present globally
-    set:
-      global:
-        commonLabelsAndAnnotations:
-          environment: development
-          component: backend
-          partOf: myApplication
-          owner: infra
-      # commonLabelsAndAnnotations: {} # Intentionally missing locally
-    asserts:
-      - equal:
-          path: metadata.labels["mapcolonies.io/environment"]
-          value: development
 
   - it: Should fail if commonLabelsAndAnnotations is missing locally AND globally
     set:
