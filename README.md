@@ -3,9 +3,9 @@
 This Helm chart provides MapColonies predefined labels and annotations through helper templates to streamline Kubernetes application deployments.
 
 ## Features
-- Standardized Kubernetes labels and annotations
+- Standardized MapColonies labels and annotations
 - Global and local metadata configuration
-- Built-in validation for metadata values
+- Built-in schema-based validation for metadata values
 - Helm template helpers for easy integration
 
 ## Installation
