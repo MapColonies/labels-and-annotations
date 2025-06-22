@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Values Schema for MapColonies Labels and Annotations",
+  "required": ["component", "partOf", "owner"],
+  "properties": {
+    "environment": {
+      "type": "string",
+      "enum": ["development", "stage", "production"],
+      "description": "The environment in which the deployment is running"
+    },
+    "component": {
+      "type": "string",
+      "enum": [
+        "frontend",
+        "backend",
+        "database",
+        "proxy-server",
+        "cache-server",
+        "infrastructure"
+      ],
+      "description": "The component type"
+    },
+    "partOf": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The system this deployment is part of"
+    },
+    "owner": {
+      "type": "string",
+      "enum": ["vector", "raster", "3d", "app", "dem", "infra", "common"],
+      "description": "The team that owns this deployment"
+    },
+    "gisDomain": {
+      "type": "string",
+      "enum": ["vector", "raster", "3d", "dem", "terrain-analysis"],
+      "description": "The GIS domain this deployment relates to"
+    },
+    "metricsEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether metrics are enabled for this deployment"
+    },
+    "metricsPort": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535,
+      "default": 8080,
+      "description": "The port on which metrics are exposed"
+    },
+    "metricsPath": {
+      "type": "string",
+      "pattern": "^/",
+      "default": "/metrics",
+      "description": "The path on which metrics are exposed"
+    }
+  }
+}

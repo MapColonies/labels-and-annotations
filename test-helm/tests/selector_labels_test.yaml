@@ -2,9 +2,9 @@ suite: test selector labels
 tests:
   - it: Should render selector labels correctly
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: development
-        component: backend # Required for 'common-labels-and-annotations.labels'
+        component: backend # Required for 'mcLabelsAndAnnotations.labels'
         partOf: myApplication
         owner: infra
     asserts:
@@ -26,9 +26,9 @@ tests:
   - it: selectorLabels should use global values if local are not set
     set:
       global:
-        commonLabelsAndAnnotations:
+        mcLabelsAndAnnotations:
           environment: production
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         # environment: development # Intentionally not set locally
         component: backend
         partOf: myApplication
@@ -52,9 +52,9 @@ tests:
   - it: selectorLabels should use local values to override global
     set:
       global:
-        commonLabelsAndAnnotations:
+        mcLabelsAndAnnotations:
           environment: production
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: development # Local override
         component: backend
         partOf: myApplication

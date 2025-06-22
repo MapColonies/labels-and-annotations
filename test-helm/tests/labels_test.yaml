@@ -2,7 +2,7 @@ suite: test labels
 tests:
   - it: Should render labels correctly
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: development
         component: backend
         partOf: myApplication
@@ -21,44 +21,39 @@ tests:
           path: metadata.labels["mapcolonies.io/owner"]
           value: infra
       - isNull:
-          path: metadata.labels["mapcolonies.io/release-version"] # Not set by default
-      - isNull:
           path: metadata.labels["mapcolonies.io/gis-domain"] # Not set by default
 
   - it: Should render labels with global overrides
     set:
       global:
-        commonLabelsAndAnnotations:
+        mcLabelsAndAnnotations:
           environment: production
-          component: global-backend
-          partOf: global-app
-          owner: common
-      commonLabelsAndAnnotations:
-        component: backend # This should override global.component
-        partOf: myApplication # This should override global.partOf
-        owner: vector # This should override global.owner
+      mcLabelsAndAnnotations:
+        environment: development # This should override global.environment
+        component: backend 
+        partOf: myApplication
+        owner: vector
     asserts:
       - equal:
           path: metadata.labels["mapcolonies.io/environment"]
-          value: production # From global
+          value: development # Local overrides global
       - equal:
           path: metadata.labels["mapcolonies.io/component"]
-          value: backend # Local overrides global
+          value: backend
       - equal:
           path: metadata.labels["mapcolonies.io/part-of"]
-          value: myApplication # Local overrides global
+          value: myApplication
       - equal:
           path: metadata.labels["mapcolonies.io/owner"]
-          value: vector # Local overrides global
+          value: vector
 
   - it: Should render labels with optional fields
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: stage
         component: frontend
         partOf: anotherApp
         owner: raster
-        releaseVersion: v1.2.3
         gisDomain: 3d
     asserts:
       - equal:
@@ -73,9 +68,6 @@ tests:
       - equal:
           path: metadata.labels["mapcolonies.io/owner"]
           value: raster
-      - equal:
-          path: metadata.labels["mapcolonies.io/release-version"]
-          value: v1.2.3
       - equal:
           path: metadata.labels["mapcolonies.io/gis-domain"]
           value: 3d

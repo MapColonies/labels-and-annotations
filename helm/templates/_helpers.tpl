@@ -1,40 +1,27 @@
 {{/*
 Create common labels for all kubernetes components
 */}}
-{{- define "common-labels-and-annotations.selectorLabels" -}}
-{{- $commonLabelsAndAnnotations := fromYaml (include "commonLabelsAndAnnotations.merged" .) -}}
-mapcolonies.io/environment: {{ $commonLabelsAndAnnotations.environment }}
+{{- define "mcLabelsAndAnnotations.selectorLabels" -}}
+mapcolonies.io/environment: {{ include "environmentMerged" . }}
 {{- end }}
 
 {{/*
 Create common labels for all kubernetes components
 */}}
-{{- define "common-labels-and-annotations.labels" -}}
-{{- include "validate" . }}
-{{- $commonLabelsAndAnnotations := fromYaml (include "commonLabelsAndAnnotations.merged" .) -}}
-mapcolonies.io/part-of: {{ $commonLabelsAndAnnotations.partOf }}
-mapcolonies.io/owner: {{ $commonLabelsAndAnnotations.owner }}
-mapcolonies.io/component: {{ $commonLabelsAndAnnotations.component }}
-{{- if hasKey $commonLabelsAndAnnotations "releaseVersion" }}
-mapcolonies.io/release-version: {{ $commonLabelsAndAnnotations.releaseVersion }}
-{{- end -}}
-{{ if hasKey $commonLabelsAndAnnotations "gisDomain" }}
-mapcolonies.io/gis-domain: {{ $commonLabelsAndAnnotations.gisDomain }}
+{{- define "mcLabelsAndAnnotations.labels" -}}
+mapcolonies.io/part-of: {{ .Values.mcLabelsAndAnnotations.partOf }}
+mapcolonies.io/owner: {{ .Values.mcLabelsAndAnnotations.owner }}
+mapcolonies.io/component: {{ .Values.mcLabelsAndAnnotations.component }}
+{{- if hasKey .Values.mcLabelsAndAnnotations "gisDomain" }}
+mapcolonies.io/gis-domain: {{ .Values.mcLabelsAndAnnotations.gisDomain }}
 {{- end -}}
 {{- end }}
 
 {{/*
 Create common annotations for all kubernetes components
 */}}
-{{- define "common-labels-and-annotations.annotations" -}}
-{{- end }}
-
-{{/*
-Create prometheus annotations for enabling metrics
-*/}}
-{{- define "common-labels-and-annotations.metricsAnnotations" -}}
-{{- $commonLabelsAndAnnotations := fromYaml (include "commonLabelsAndAnnotations.merged" .) -}}
-prometheus.io/scrape: "true"
-prometheus.io/port: {{ coalesce $commonLabelsAndAnnotations.metricsPort "8080" | quote }}
-prometheus.io/path: {{ coalesce $commonLabelsAndAnnotations.metricsPath "/metrics" | quote }}
+{{- define "mcLabelsAndAnnotations.annotations" -}}
+prometheus.io/scrape: {{ coalesce .Values.mcLabelsAndAnnotations.metricsEnabled "true" | quote }}
+prometheus.io/port: {{ coalesce .Values.mcLabelsAndAnnotations.metricsPort "8080" | quote }}
+prometheus.io/path: {{ coalesce .Values.mcLabelsAndAnnotations.metricsPath "/metrics" | quote }}
 {{- end }}

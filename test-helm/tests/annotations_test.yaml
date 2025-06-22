@@ -2,7 +2,7 @@ suite: test annotations
 tests:
   - it: Should render annotations (currently none)
     set:
-      commonLabelsAndAnnotations: # Need this block to pass general validation
+      mcLabelsAndAnnotations: # Need this block to pass general validation
         environment: development
         component: backend
         partOf: myApplication
