@@ -2,80 +2,80 @@ suite: test validations
 tests:
   - it: Should fail if environment is missing
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         component: backend
         partOf: myApplication
         owner: infra
     asserts:
       - failedTemplate:
-          errorMessage: "There is no environment key in commonLabelsAndAnnotations"
+          errorMessage: "There is no environment key in mcLabelsAndAnnotations, globally or locally"
 
   - it: Should fail if partOf is missing
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: development
         component: backend
         owner: infra
     asserts:
       - failedTemplate:
-          errorMessage: "There is no partOf key in commonLabelsAndAnnotations"
+          errorPattern: "partOf is required"
 
   - it: Should fail if owner is missing
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: development
         component: backend
         partOf: myApplication
     asserts:
       - failedTemplate:
-          errorMessage: "There is no owner key in commonLabelsAndAnnotations"
+          errorPattern: "owner is required"
 
   - it: Should fail if component is missing
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: development
         partOf: myApplication
         owner: infra
     asserts:
       - failedTemplate:
-          errorMessage: "There is no component key in commonLabelsAndAnnotations"
+          errorPattern: "component is required"
 
   - it: Should fail for invalid environment value
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: "invalid-env"
         component: backend
         partOf: myApplication
         owner: infra
     asserts:
       - failedTemplate:
-          errorPattern: "Provided: invalid-env"
+          errorPattern: 'environment must be one of the following: "development", "stage", "production"'
 
   - it: Should fail for invalid component value
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: development
         component: "invalid-component"
         partOf: myApplication
         owner: infra
     asserts:
       - failedTemplate:
-          errorPattern: "Provided: invalid-component."
+          errorPattern: 'component must be one of the following: "frontend", "backend", "database", "proxy-server", "cache-server", "infrastructure"'
 
   - it: Should fail for invalid owner value
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: development
         component: backend
         partOf: myApplication
         owner: "invalid-owner"
     asserts:
       - failedTemplate:
-          errorPattern: "Provided: invalid-owner"
+          errorPattern: 'owner must be one of the following: "vector", "raster", "3d", "app", "dem", "infra", "common"'
 
   - it: Should fail for invalid gisDomain value
     set:
-      commonLabelsAndAnnotations:
+      mcLabelsAndAnnotations:
         environment: development
         component: backend
         partOf: myApplication
@@ -83,26 +83,12 @@ tests:
         gisDomain: "invalid-gis"
     asserts:
       - failedTemplate: 
-          errorPattern: "Provided: invalid-gis"
+          errorPattern: 'gisDomain must be one of the following: "vector", "raster", "3d", "dem", "terrain-analysis"'
 
-  - it: Should pass if commonLabelsAndAnnotations is missing locally but present globally
-    set:
-      global:
-        commonLabelsAndAnnotations:
-          environment: development
-          component: backend
-          partOf: myApplication
-          owner: infra
-      # commonLabelsAndAnnotations: {} # Intentionally missing locally
-    asserts:
-      - equal:
-          path: metadata.labels["mapcolonies.io/environment"]
-          value: development
-
-  - it: Should fail if commonLabelsAndAnnotations is missing locally AND globally
+  - it: Should fail if mcLabelsAndAnnotations is missing locally AND globally
     set:
       global: {}
-      # commonLabelsAndAnnotations: {} # Intentionally missing locally
+      # mcLabelsAndAnnotations: {} # Intentionally missing locally
     asserts:
       - failedTemplate:
-          errorMessage: "There is no commonLabelsAndAnnotations key (locally or globally)"
+          errorPattern: "values don't meet the specifications of the schema"

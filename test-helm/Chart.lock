@@ -1,6 +1,6 @@
 dependencies:
-- name: common-labels-and-annotations
+- name: mcLabelsAndAnnotations
   repository: file://../helm
-  version: 0.3.0
-digest: sha256:da1ed04b20e7548792edb14adc35e81836de5507d39ceafe21adcadd81f01a7c
-generated: "2025-05-18T16:49:52.952833945+03:00"
+  version: 0.4.0
+digest: sha256:1e2ca72b5ebb2a610e8466e04ba79091f18e4228e88b7c4019782023488e8ada
+generated: "2025-06-22T19:40:02.115365551+03:00"
