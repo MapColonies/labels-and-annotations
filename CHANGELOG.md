@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.4.0...v0.5.0) (2025-06-22)
+
+
+### Features
+
+* use schema instead of template file ([#19](https://github.com/MapColonies/labels-and-annotations/issues/19)) ([fcfd01b](https://github.com/MapColonies/labels-and-annotations/commit/fcfd01bb15d62d6b13f748b0778cda8d3e2004ba))
+
 ## [0.4.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.3.0...v0.4.0) (2025-05-29)
 
 
