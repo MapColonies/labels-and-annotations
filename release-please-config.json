@@ -13,7 +13,7 @@
         {
           "type": "yaml",
           "path": "test-helm/Chart.yaml",
-          "jsonpath": "$.dependencies.version"
+          "jsonpath": "$.dependencies[0].version"
         },
         "README.md"
       ]
