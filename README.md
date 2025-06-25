@@ -15,7 +15,7 @@ Add this chart as a dependency in your `Chart.yaml`:
 ```yaml
 dependencies:
   - name: mc-labels-and-annotations
-    version: 0.5.0
+    version: 0.5.1
     repository: oci://acrarolibotnonprod.azurecr.io/helm/infra
 ```
 <!-- x-release-please-end-version -->
