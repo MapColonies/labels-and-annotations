@@ -1,4 +1,4 @@
-# mcLabelsAndAnnotations
+# mc-labels-and-annotations
 
 This Helm chart provides MapColonies predefined labels and annotations through helper templates to streamline Kubernetes application deployments.
 
@@ -14,7 +14,7 @@ Add this chart as a dependency in your `Chart.yaml`:
 <!-- x-release-please-start-version -->
 ```yaml
 dependencies:
-  - name: mcLabelsAndAnnotations
+  - name: mc-labels-and-annotations
     version: 0.5.0
     repository: oci://acrarolibotnonprod.azurecr.io/helm/infra
 ```
@@ -27,7 +27,7 @@ helm dependency update
 ## Usage
 
 ### Template Integration
-Add these functions `{{ include "mcLabelsAndAnnotations.labels" . }}` and `{{ include "mcLabelsAndAnnotations.selectorLabels" . }}` to your labels and selectorLabels functions respectively under `_helpers.tpl` file:
+Add these functions `{{ include "mc-labels-and-annotations.labels" . }}` and `{{ include "mc-labels-and-annotations.selectorLabels" . }}` to your labels and selectorLabels functions respectively under `_helpers.tpl` file:
 
 ```yaml
 {{/*
@@ -37,7 +37,7 @@ Common labels
 ...
 YOUR CODE
 ...
-{{ include "mcLabelsAndAnnotations.labels" . }}
+{{ include "mc-labels-and-annotations.labels" . }}
 {{- end }}
 ```
 
@@ -50,7 +50,7 @@ Selector labels
 YOUR CODE
 ...
 
-{{ include "mcLabelsAndAnnotations.selectorLabels" . }}
+{{ include "mc-labels-and-annotations.selectorLabels" . }}
 {{- end }}
 ```
 
@@ -58,19 +58,19 @@ If you want to add also annotations (for example, enabling metrics annotations),
 ```yaml
 metadata:
   annotations:
-    {{ include "mcLabelsAndAnnotations.annotations" . | nindent 4 }}
+    {{ include "mc-labels-and-annotations.annotations" . | nindent 4 }}
 ```
 
 ### Configuration
-Define "mcLabelsAndAnnotations" in `values.yaml`. Some values can be set globally and can be overridden locally for specific cases
+Define "mc-labels-and-annotations" in `values.yaml`. Some values can be set globally and can be overridden locally for specific cases
 
 ```yaml
 global:
-  mcLabelsAndAnnotations:
+  mc-labels-and-annotations:
     environment: "development"
 
-mcLabelsAndAnnotations:
-  environment: "stage" # Overrides global.mcLabelsAndAnnotations.environment
+mc-labels-and-annotations:
+  environment: "stage" # Overrides global.mc-labels-and-annotations.environment
   owner: "3d"
 ```
 
@@ -93,7 +93,7 @@ The chart validates the following metadata fields:
 
 ### File Structure
 - `templates/_helpers.tpl`: Contains helper functions for generating labels and annotations.
-- `templates/_setValues.tpl`: Contains functions for merging and setting mcLabelsAndAnnotations values.
+- `templates/_setValues.tpl`: Contains functions for merging and setting mc-labels-and-annotations values.
 
 ### Adding New Labels Or Annotations
 1. Add the labels or annotations in `templates/_helpers.tpl`.

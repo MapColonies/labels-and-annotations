@@ -40,7 +40,7 @@ helm.sh/chart: {{ include "test-helm.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{ include "mcLabelsAndAnnotations.labels" . }}
+{{ include "mc-labels-and-annotations.labels" . }}
 {{- end }}
 
 {{/*
@@ -49,7 +49,7 @@ Selector labels
 {{- define "test-helm.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "test-helm.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{ include "mcLabelsAndAnnotations.selectorLabels" . }}
+{{ include "mc-labels-and-annotations.selectorLabels" . }}
 {{- end }}
 
 {{/*
