@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/MapColonies/labels-and-annotations/compare/v0.5.0...v0.5.1) (2025-06-25)
+
+
+### Bug Fixes
+
+* naming ([#22](https://github.com/MapColonies/labels-and-annotations/issues/22)) ([4ca4fc0](https://github.com/MapColonies/labels-and-annotations/commit/4ca4fc0f5548e854d6b5641f06adf3b562210755))
+
 ## [0.5.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.4.0...v0.5.0) (2025-06-22)
 
 
