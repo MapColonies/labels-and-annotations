@@ -56,9 +56,11 @@ YOUR CODE
 
 If you want to add also annotations (for example, enabling metrics annotations), use this function:
 ```yaml
-metadata:
-  annotations:
-    {{ include "mc-labels-and-annotations.annotations" . | nindent 4 }}
+spec:
+  template:
+    metadata:
+      annotations:
+        {{ include "mc-labels-and-annotations.annotations" . | nindent 8 }}
 ```
 
 ### Configuration
