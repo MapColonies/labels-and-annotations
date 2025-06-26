@@ -2,13 +2,13 @@
 Create common labels for all kubernetes components
 */}}
 {{- define "mc-labels-and-annotations.selectorLabels" -}}
-mapcolonies.io/environment: {{ include "environmentMerged" . }}
 {{- end }}
 
 {{/*
 Create common labels for all kubernetes components
 */}}
 {{- define "mc-labels-and-annotations.labels" -}}
+mapcolonies.io/environment: {{ include "environmentMerged" . }}
 mapcolonies.io/part-of: {{ .Values.mcLabelsAndAnnotations.partOf }}
 mapcolonies.io/owner: {{ .Values.mcLabelsAndAnnotations.owner }}
 mapcolonies.io/component: {{ .Values.mcLabelsAndAnnotations.component }}
