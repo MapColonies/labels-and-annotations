@@ -65,14 +65,14 @@ spec:
 ```
 
 ### Configuration
-Define "mc-labels-and-annotations" in `values.yaml`. Some values can be set globally and can be overridden locally for specific cases
+Define "mcLabelsAndAnnotations" in `values.yaml`. Some values can be set globally and can be overridden locally for specific cases
 
 ```yaml
 global:
-  mc-labels-and-annotations:
+  mcLabelsAndAnnotations:
     environment: "development"
 
-mc-labels-and-annotations:
+mcLabelsAndAnnotations:
   environment: "stage" # Overrides global.mc-labels-and-annotations.environment
   owner: "3d"
 ```
