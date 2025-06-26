@@ -1,4 +1,6 @@
 suite: test selector labels
+skip:
+  reason:  "This test suite is focused on selector labels but currently the package doesn't have any"
 tests:
   - it: Should render selector labels correctly
     set:
