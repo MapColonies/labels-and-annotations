@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.5.1...v0.6.0) (2025-06-26)
+
+
+### Features
+
+* remove environment as selector label ([#27](https://github.com/MapColonies/labels-and-annotations/issues/27)) ([5146dd2](https://github.com/MapColonies/labels-and-annotations/commit/5146dd20e88f96c2cdbf3a502f5825b56ae64515))
+
+
+### Bug Fixes
+
+* README.md ([1728ed6](https://github.com/MapColonies/labels-and-annotations/commit/1728ed62dc46ea3aa02f3b7804a325abaa2b9214))
+
 ## [0.5.1](https://github.com/MapColonies/labels-and-annotations/compare/v0.5.0...v0.5.1) (2025-06-25)
 
 
