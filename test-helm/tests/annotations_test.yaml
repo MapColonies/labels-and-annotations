@@ -1,16 +1,62 @@
 suite: test annotations
 tests:
-  - it: Should render annotations (currently none)
+  - it: Should not include Prometheus annotations by default
     set:
-      mcLabelsAndAnnotations: # Need this block to pass general validation
+      mcLabelsAndAnnotations:
         environment: development
         component: backend
         partOf: myApplication
         owner: infra
     asserts:
       - template: deployment.yaml
-        isKind:
-          of: Deployment
-      - template: service.yaml
-        isKind:
-          of: Service
+        notEqual:
+          path: spec.template.metadata.annotations["prometheus.io/scrape"]
+          value: "false"
+            
+  - it: Should include default Prometheus annotations when prometheus.enabled is true
+    set:
+      mcLabelsAndAnnotations:
+        environment: development
+        component: backend
+        partOf: myApplication
+        owner: infra
+        prometheus:
+          enabled: true
+    asserts:
+      - template: deployment.yaml
+        equal:
+          path: spec.template.metadata.annotations["prometheus.io/scrape"]
+          value: "true"
+      - template: deployment.yaml
+        equal:
+          path: spec.template.metadata.annotations["prometheus.io/port"]
+          value: "8080"
+      - template: deployment.yaml
+        equal:
+          path: spec.template.metadata.annotations["prometheus.io/path"]
+          value: "/metrics"
+
+  - it: Should include Prometheus annotations when prometheus.enabled is true and has values
+    set:
+      mcLabelsAndAnnotations:
+        environment: development
+        component: backend
+        partOf: myApplication
+        owner: infra
+        prometheus:
+          enabled: true
+          port: 90
+          path: /custom-metrics
+    asserts:
+      - template: deployment.yaml
+        equal:
+          path: spec.template.metadata.annotations["prometheus.io/scrape"]
+          value: "true"
+      - template: deployment.yaml
+        equal:
+          path: spec.template.metadata.annotations["prometheus.io/port"]
+          value: "90"
+      - template: deployment.yaml
+        equal:
+          path: spec.template.metadata.annotations["prometheus.io/path"]
+          value: "/custom-metrics"

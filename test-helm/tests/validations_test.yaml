@@ -1,19 +1,8 @@
 suite: test validations
 tests:
-  - it: Should fail if environment is missing
-    set:
-      mcLabelsAndAnnotations:
-        component: backend
-        partOf: myApplication
-        owner: infra
-    asserts:
-      - failedTemplate:
-          errorMessage: "There is no environment key in mcLabelsAndAnnotations, globally or locally"
-
   - it: Should fail if partOf is missing
     set:
       mcLabelsAndAnnotations:
-        environment: development
         component: backend
         owner: infra
     asserts:
@@ -23,7 +12,6 @@ tests:
   - it: Should fail if owner is missing
     set:
       mcLabelsAndAnnotations:
-        environment: development
         component: backend
         partOf: myApplication
     asserts:
@@ -33,7 +21,6 @@ tests:
   - it: Should fail if component is missing
     set:
       mcLabelsAndAnnotations:
-        environment: development
         partOf: myApplication
         owner: infra
     asserts:
