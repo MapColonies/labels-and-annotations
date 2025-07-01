@@ -83,14 +83,14 @@ The chart validates the following metadata fields:
 
 | Field | Required | Valid Values | Notes |
 |----------------|----------|---------------------|----|
-| environment | Yes | development, production, stage | Can be set globally |
+| environment | No | development, production, stage | Can be set globally |
 | component | Yes | frontend, backend, database, proxy-server, cache-server, infrastructure | |
 | partOf | Yes | non-empty string | |
 | owner | Yes | vector, raster, 3d, app, dem, infra, common | Who is the owner of the deployment |
 | gisDomain | No | vector, raster, 3d, dem, terrain-analysis | To what GIS domain it is related |
-| metricsEnabled | No | boolean | Whether to enable metrics annotations (enabled as default) |
-| metricsPort | No | port number | The port on which the metrics are exposed (8080 as default) |
-| metricsPath | No | url path | The path on which the metrics are exposed (/metrics as default) |
+| prometheus.enabled | No | boolean | Whether to enable metrics annotations (disabled as default) |
+| prometheus.port | No | port number | The port on which the metrics are exposed (8080 as default) |
+| prometheus.path | No | url path | The path on which the metrics are exposed (/metrics as default) |
 
 ## Maintainers
 
