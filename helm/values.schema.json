@@ -36,23 +36,29 @@
       "enum": ["vector", "raster", "3d", "dem", "terrain-analysis"],
       "description": "The GIS domain this deployment relates to"
     },
-    "metricsEnabled": {
-      "type": "boolean",
-      "default": true,
-      "description": "Whether metrics are enabled for this deployment"
-    },
-    "metricsPort": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 65535,
-      "default": 8080,
-      "description": "The port on which metrics are exposed"
-    },
-    "metricsPath": {
-      "type": "string",
-      "pattern": "^/",
-      "default": "/metrics",
-      "description": "The path on which metrics are exposed"
+    "prometheus": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether Prometheus metrics are enabled for this deployment"
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 8080,
+          "description": "The port on which Prometheus metrics are exposed"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^/",
+          "default": "/metrics",
+          "description": "The path on which Prometheus metrics are exposed"
+        }
+      },
+      "required": ["enabled"]
     }
   }
 }
