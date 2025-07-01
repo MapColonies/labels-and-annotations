@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.6.0...v0.7.0) (2025-07-01)
+
+
+### Features
+
+* allow environment ([#28](https://github.com/MapColonies/labels-and-annotations/issues/28)) ([cf8f878](https://github.com/MapColonies/labels-and-annotations/commit/cf8f878acea40c3c894b8cfbcf1f99fa0f8c5079))
+
 ## [0.6.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.5.1...v0.6.0) (2025-06-26)
 
 
