@@ -59,6 +59,11 @@
         }
       },
       "required": ["enabled"]
+    },
+    "logScraping": {
+      "type": "boolean",
+      "description": "Whether to enable log scraping for this deployment",
+      "default": false
     }
   }
 }

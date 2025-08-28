@@ -75,22 +75,26 @@ global:
 mcLabelsAndAnnotations:
   environment: "stage" # Overrides global.mc-labels-and-annotations.environment
   owner: "3d"
+  prometheus:
+    enabled: true
+    port: 8080
 ```
 
 ### Validation Rules
 
 The chart validates the following metadata fields:
 
-| Field | Required | Valid Values | Notes |
-|----------------|----------|---------------------|----|
-| environment | No | development, production, stage | Can be set globally |
-| component | Yes | frontend, backend, database, proxy-server, cache-server, infrastructure | |
-| partOf | Yes | non-empty string | |
-| owner | Yes | vector, raster, 3d, app, dem, infra, common | Who is the owner of the deployment |
-| gisDomain | No | vector, raster, 3d, dem, terrain-analysis | To what GIS domain it is related |
-| prometheus.enabled | No | boolean | Whether to enable metrics annotations (disabled as default) |
-| prometheus.port | No | port number | The port on which the metrics are exposed (8080 as default) |
-| prometheus.path | No | url path | The path on which the metrics are exposed (/metrics as default) |
+| Field              | Required | Valid Values                                                            | Default | Notes |
+|--------------------|----------|----------------|----|----|
+| environment        | No       | development, production, stage                                          | - | Can be set globally or locally |
+| component          | Yes      | frontend, backend, database, proxy-server, cache-server, infrastructure | - | |
+| partOf             | Yes      | non-empty string                                                        | - | |
+| owner              | Yes      | vector, raster, 3d, app, dem, infra, common                             | - | Who is the owner of the deployment |
+| gisDomain          | No       | vector, raster, 3d, dem, terrain-analysis                               | - | To what GIS domain it is related |
+| prometheus.enabled | No       | boolean | false | Whether to enable metrics annotations |
+| prometheus.port    | No       | port number | 8080 | The port on which the metrics are exposed |
+| prometheus.path    | No       | url path | /metrics | The path on which the metrics are exposed  |
+| logScraping        | No       | boolean | false | Whether to enable log scraping for this deployment |
 
 ## Maintainers
 
