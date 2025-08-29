@@ -12,6 +12,7 @@ mapcolonies.io/environment: {{ include "environmentMerged" . }}
 mapcolonies.io/part-of: {{ .Values.mcLabelsAndAnnotations.partOf }}
 mapcolonies.io/owner: {{ .Values.mcLabelsAndAnnotations.owner }}
 mapcolonies.io/component: {{ .Values.mcLabelsAndAnnotations.component }}
+mapcolonies.io/alloy-api-logs: {{ coalesce .Values.mcLabelsAndAnnotations.logScraping "false" | quote }}
 {{- if hasKey .Values.mcLabelsAndAnnotations "gisDomain" }}
 mapcolonies.io/gis-domain: {{ .Values.mcLabelsAndAnnotations.gisDomain }}
 {{- end -}}

@@ -20,6 +20,9 @@ tests:
       - equal:
           path: metadata.labels["mapcolonies.io/owner"]
           value: infra
+      - equal:
+          path: metadata.labels["mapcolonies.io/alloy-api-logs"]
+          value: "false"
       - isNull:
           path: metadata.labels["mapcolonies.io/gis-domain"] # Not set by default
 
@@ -91,3 +94,15 @@ tests:
       - equal:
           path: metadata.labels["mapcolonies.io/owner"]
           value: raster
+
+  - it: Should set log scraping label when enabled
+    set:
+      mcLabelsAndAnnotations:
+        component: frontend
+        partOf: avi
+        owner: infra
+        logScraping: true
+    asserts:
+      - equal:
+          path: metadata.labels["mapcolonies.io/alloy-api-logs"]
+          value: "true"
