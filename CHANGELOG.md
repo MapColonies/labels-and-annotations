@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.7.0...v0.8.0) (2025-08-29)
+
+
+### Features
+
+* add alloy label ([#31](https://github.com/MapColonies/labels-and-annotations/issues/31)) ([a148be0](https://github.com/MapColonies/labels-and-annotations/commit/a148be04524c40aff22d115015306f8e81295a55))
+
 ## [0.7.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.6.0...v0.7.0) (2025-07-01)
 
 
