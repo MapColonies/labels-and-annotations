@@ -14,10 +14,9 @@ Add this chart as a dependency in your `Chart.yaml`:
 <!-- x-release-please-start-version -->
 ```yaml
 dependencies:
-  - name: mc-labels-and-annotations
+  - name: mcLabelsAndAnnotations
     version: 0.8.0
     repository: oci://acrarolibotnonprod.azurecr.io/helm/infra
-    alias: mcLabelsAndAnnotations
 ```
 <!-- x-release-please-end-version -->
 Then run:
@@ -28,7 +27,7 @@ helm dependency update
 ## Usage
 
 ### Template Integration
-Add these functions `{{ include "mc-labels-and-annotations.labels" . }}` and `{{ include "mc-labels-and-annotations.selectorLabels" . }}` to your labels and selectorLabels functions respectively under `_helpers.tpl` file:
+Add these functions `{{ include "mcLabelsAndAnnotations.labels" . }}` and `{{ include "mcLabelsAndAnnotations.selectorLabels" . }}` to your labels and selectorLabels functions respectively under `_helpers.tpl` file:
 
 ```yaml
 {{/*
@@ -38,7 +37,7 @@ Common labels
 ...
 YOUR CODE
 ...
-{{ include "mc-labels-and-annotations.labels" . }}
+{{ include "mcLabelsAndAnnotations.labels" . }}
 {{- end }}
 ```
 
@@ -51,7 +50,7 @@ Selector labels
 YOUR CODE
 ...
 
-{{ include "mc-labels-and-annotations.selectorLabels" . }}
+{{ include "mcLabelsAndAnnotations.selectorLabels" . }}
 {{- end }}
 ```
 
@@ -61,7 +60,7 @@ spec:
   template:
     metadata:
       annotations:
-        {{ include "mc-labels-and-annotations.annotations" . | nindent 8 }}
+        {{ include "mcLabelsAndAnnotations.annotations" . | nindent 8 }}
 ```
 
 ### Configuration
@@ -73,7 +72,7 @@ global:
     environment: "development"
 
 mcLabelsAndAnnotations:
-  environment: "stage" # Overrides global.mc-labels-and-annotations.environment
+  environment: "stage" # Overrides global.mcLabelsAndAnnotations.environment
   owner: "3d"
   prometheus:
     enabled: true
@@ -100,7 +99,7 @@ The chart validates the following metadata fields:
 
 ### File Structure
 - `templates/_helpers.tpl`: Contains helper functions for generating labels and annotations.
-- `templates/_setValues.tpl`: Contains functions for merging and setting mc-labels-and-annotations values.
+- `templates/_setValues.tpl`: Contains functions for merging and setting mcLabelsAndAnnotations values.
 
 ### Adding New Labels Or Annotations
 1. Add the labels or annotations in `templates/_helpers.tpl`.
