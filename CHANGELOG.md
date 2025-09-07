@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.8.0...v1.0.0) (2025-09-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename library name to camelCase ([#33](https://github.com/MapColonies/labels-and-annotations/issues/33))
+
+### Code Refactoring
+
+* rename library name to camelCase ([#33](https://github.com/MapColonies/labels-and-annotations/issues/33)) ([e53fb45](https://github.com/MapColonies/labels-and-annotations/commit/e53fb456f5c4a889550b143c13379096ca9eb442))
+
 ## [0.8.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.7.0...v0.8.0) (2025-08-29)
 
 
