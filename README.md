@@ -107,3 +107,8 @@ The chart validates the following metadata fields:
 ### Adding New Validations
 1. Define valid values in `templates/_setValues.tpl`.
 2. Add validation logic in `templates/_validations.tpl`.
+
+## Migrations
+
+### v0.x.x to v1
+Rename the library name from `mc-labels-and-annotations` to `mcLabelsAndAnnotations` in your `Chart.yaml` dependencies and update the references in your templates accordingly.
