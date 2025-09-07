@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        {{ include "mcLabelsAndAnnotations.annotations" . | nindent 8 }}
+        {{ include "mclabels.annotations" . | nindent 8 }}
       {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}

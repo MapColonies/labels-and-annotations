@@ -2,7 +2,7 @@ suite: test annotations
 tests:
   - it: Should not include Prometheus annotations by default
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         environment: development
         component: backend
         partOf: myApplication
@@ -15,7 +15,7 @@ tests:
             
   - it: Should include default Prometheus annotations when prometheus.enabled is true
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         environment: development
         component: backend
         partOf: myApplication
@@ -38,7 +38,7 @@ tests:
 
   - it: Should include Prometheus annotations when prometheus.enabled is true and has values
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         environment: development
         component: backend
         partOf: myApplication

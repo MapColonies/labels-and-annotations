@@ -1,5 +1,5 @@
 apiVersion: v2
-name: mcLabelsAndAnnotations
+name: mclabels
 description: >-
   A MapColonies' helm library chart for creating and validating Kubernetes
   labels and annotations.

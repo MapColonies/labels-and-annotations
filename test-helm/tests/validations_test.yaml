@@ -2,7 +2,7 @@ suite: test validations
 tests:
   - it: Should fail if partOf is missing
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         component: backend
         owner: infra
     asserts:
@@ -11,7 +11,7 @@ tests:
 
   - it: Should fail if owner is missing
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         component: backend
         partOf: myApplication
     asserts:
@@ -20,7 +20,7 @@ tests:
 
   - it: Should fail if component is missing
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         partOf: myApplication
         owner: infra
     asserts:
@@ -29,7 +29,7 @@ tests:
 
   - it: Should fail for invalid environment value
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         environment: "invalid-env"
         component: backend
         partOf: myApplication
@@ -40,7 +40,7 @@ tests:
 
   - it: Should fail for invalid component value
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         environment: development
         component: "invalid-component"
         partOf: myApplication
@@ -51,7 +51,7 @@ tests:
 
   - it: Should fail for invalid owner value
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         environment: development
         component: backend
         partOf: myApplication
@@ -62,7 +62,7 @@ tests:
 
   - it: Should fail for invalid gisDomain value
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         environment: development
         component: backend
         partOf: myApplication
@@ -72,10 +72,10 @@ tests:
       - failedTemplate: 
           errorPattern: 'gisDomain must be one of the following: "vector", "raster", "3d", "dem", "terrain-analysis"'
 
-  - it: Should fail if mcLabelsAndAnnotations is missing locally AND globally
+  - it: Should fail if mclabels is missing locally AND globally
     set:
       global: {}
-      # mcLabelsAndAnnotations: {} # Intentionally missing locally
+      # mclabels: {} # Intentionally missing locally
     asserts:
       - failedTemplate:
           errorPattern: "values don't meet the specifications of the schema"
