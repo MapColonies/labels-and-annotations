@@ -1,30 +1,30 @@
 {{/*
 Create common labels for all kubernetes components
 */}}
-{{- define "mcLabelsAndAnnotations.selectorLabels" -}}
+{{- define "mclabels.selectorLabels" -}}
 {{- end }}
 
 {{/*
 Create common labels for all kubernetes components
 */}}
-{{- define "mcLabelsAndAnnotations.labels" -}}
+{{- define "mclabels.labels" -}}
 mapcolonies.io/environment: {{ include "environmentMerged" . }}
-mapcolonies.io/part-of: {{ .Values.mcLabelsAndAnnotations.partOf }}
-mapcolonies.io/owner: {{ .Values.mcLabelsAndAnnotations.owner }}
-mapcolonies.io/component: {{ .Values.mcLabelsAndAnnotations.component }}
-mapcolonies.io/alloy-api-logs: {{ coalesce .Values.mcLabelsAndAnnotations.logScraping "false" | quote }}
-{{- if hasKey .Values.mcLabelsAndAnnotations "gisDomain" }}
-mapcolonies.io/gis-domain: {{ .Values.mcLabelsAndAnnotations.gisDomain }}
+mapcolonies.io/part-of: {{ .Values.mclabels.partOf }}
+mapcolonies.io/owner: {{ .Values.mclabels.owner }}
+mapcolonies.io/component: {{ .Values.mclabels.component }}
+mapcolonies.io/alloy-api-logs: {{ coalesce .Values.mclabels.logScraping "false" | quote }}
+{{- if hasKey .Values.mclabels "gisDomain" }}
+mapcolonies.io/gis-domain: {{ .Values.mclabels.gisDomain }}
 {{- end -}}
 {{- end }}
 
 {{/*
 Create common annotations for all kubernetes components
 */}}
-{{- define "mcLabelsAndAnnotations.annotations" -}}
-{{- if and (hasKey .Values.mcLabelsAndAnnotations "prometheus") .Values.mcLabelsAndAnnotations.prometheus.enabled }}
+{{- define "mclabels.annotations" -}}
+{{- if and (hasKey .Values.mclabels "prometheus") .Values.mclabels.prometheus.enabled }}
 prometheus.io/scrape: "true"
-prometheus.io/port: {{ coalesce .Values.mcLabelsAndAnnotations.prometheus.port "8080" | quote }}
-prometheus.io/path: {{ coalesce .Values.mcLabelsAndAnnotations.prometheus.path "/metrics" | quote }}
+prometheus.io/port: {{ coalesce .Values.mclabels.prometheus.port "8080" | quote }}
+prometheus.io/path: {{ coalesce .Values.mclabels.prometheus.path "/metrics" | quote }}
 {{- end }}
 {{- end }}

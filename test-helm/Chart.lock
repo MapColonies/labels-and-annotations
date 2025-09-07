@@ -1,5 +1,5 @@
 dependencies:
-- name: mcLabelsAndAnnotations
+- name: mclabels
   repository: file://../helm
   version: 0.8.0
 digest: sha256:a661f1c33cde4cadb0b7e39463101b6b4e135cfc939521be83acc4b863d43779

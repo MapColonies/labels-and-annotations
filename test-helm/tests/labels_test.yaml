@@ -2,7 +2,7 @@ suite: test labels
 tests:
   - it: Should render labels correctly
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         environment: development
         component: backend
         partOf: myApplication
@@ -29,9 +29,9 @@ tests:
   - it: Should render labels with global overrides
     set:
       global:
-        mcLabelsAndAnnotations:
+        mclabels:
           environment: production
-      mcLabelsAndAnnotations:
+      mclabels:
         environment: development # This should override global.environment
         component: backend 
         partOf: myApplication
@@ -52,7 +52,7 @@ tests:
 
   - it: Should render labels with optional fields
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         environment: stage
         component: frontend
         partOf: anotherApp
@@ -77,7 +77,7 @@ tests:
 
   - it: Should set environment to undefined when not provided
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         component: frontend
         partOf: anotherApp
         owner: raster
@@ -97,7 +97,7 @@ tests:
 
   - it: Should set log scraping label when enabled
     set:
-      mcLabelsAndAnnotations:
+      mclabels:
         component: frontend
         partOf: avi
         owner: infra

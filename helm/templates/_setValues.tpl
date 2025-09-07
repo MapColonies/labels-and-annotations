@@ -1,9 +1,9 @@
 {{- define "environmentMerged" -}}
 
-{{- if hasKey .Values.mcLabelsAndAnnotations "environment" -}}
-{{- .Values.mcLabelsAndAnnotations.environment -}}
-{{- else if (and (hasKey .Values "global") (hasKey .Values.global "mcLabelsAndAnnotations") (hasKey .Values.global.mcLabelsAndAnnotations "environment")) -}}
-{{- .Values.global.mcLabelsAndAnnotations.environment -}}
+{{- if hasKey .Values.mclabels "environment" -}}
+{{- .Values.mclabels.environment -}}
+{{- else if (and (hasKey .Values "global") (hasKey .Values.global "mclabels") (hasKey .Values.global.mclabels "environment")) -}}
+{{- .Values.global.mclabels.environment -}}
 {{- else -}}
 undefined
 {{- end -}}

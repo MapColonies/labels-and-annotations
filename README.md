@@ -14,7 +14,7 @@ Add this chart as a dependency in your `Chart.yaml`:
 <!-- x-release-please-start-version -->
 ```yaml
 dependencies:
-  - name: mcLabelsAndAnnotations
+  - name: mclabels
     version: 1.0.0
     repository: oci://acrarolibotnonprod.azurecr.io/helm/infra
 ```
@@ -27,7 +27,7 @@ helm dependency update
 ## Usage
 
 ### Template Integration
-Add these functions `{{ include "mcLabelsAndAnnotations.labels" . }}` and `{{ include "mcLabelsAndAnnotations.selectorLabels" . }}` to your labels and selectorLabels functions respectively under `_helpers.tpl` file:
+Add these functions `{{ include "mclabels.labels" . }}` and `{{ include "mclabels.selectorLabels" . }}` to your labels and selectorLabels functions respectively under `_helpers.tpl` file:
 
 ```yaml
 {{/*
@@ -37,7 +37,7 @@ Common labels
 ...
 YOUR CODE
 ...
-{{ include "mcLabelsAndAnnotations.labels" . }}
+{{ include "mclabels.labels" . }}
 {{- end }}
 ```
 
@@ -50,7 +50,7 @@ Selector labels
 YOUR CODE
 ...
 
-{{ include "mcLabelsAndAnnotations.selectorLabels" . }}
+{{ include "mclabels.selectorLabels" . }}
 {{- end }}
 ```
 
@@ -60,19 +60,19 @@ spec:
   template:
     metadata:
       annotations:
-        {{ include "mcLabelsAndAnnotations.annotations" . | nindent 8 }}
+        {{ include "mclabels.annotations" . | nindent 8 }}
 ```
 
 ### Configuration
-Define "mcLabelsAndAnnotations" in `values.yaml`. Some values can be set globally and can be overridden locally for specific cases
+Define "mclabels" in `values.yaml`. Some values can be set globally and can be overridden locally for specific cases
 
 ```yaml
 global:
-  mcLabelsAndAnnotations:
+  mclabels:
     environment: "development"
 
-mcLabelsAndAnnotations:
-  environment: "stage" # Overrides global.mcLabelsAndAnnotations.environment
+mclabels:
+  environment: "stage" # Overrides global.mclabels.environment
   owner: "3d"
   prometheus:
     enabled: true
@@ -99,7 +99,7 @@ The chart validates the following metadata fields:
 
 ### File Structure
 - `templates/_helpers.tpl`: Contains helper functions for generating labels and annotations.
-- `templates/_setValues.tpl`: Contains functions for merging and setting mcLabelsAndAnnotations values.
+- `templates/_setValues.tpl`: Contains functions for merging and setting mclabels values.
 
 ### Adding New Labels Or Annotations
 1. Add the labels or annotations in `templates/_helpers.tpl`.
@@ -111,4 +111,4 @@ The chart validates the following metadata fields:
 ## Migrations
 
 ### v0.x.x to v1
-Rename the library name from `mc-labels-and-annotations` to `mcLabelsAndAnnotations` in your `Chart.yaml` dependencies and update the references in your templates accordingly.
+Rename the library name from `mc-labels-and-annotations` to `mclabels` in your `Chart.yaml` dependencies and update the references in your templates accordingly.
