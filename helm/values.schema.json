@@ -28,7 +28,7 @@
     },
     "owner": {
       "type": "string",
-      "enum": ["vector", "raster", "3d", "app", "dem", "infra", "common"],
+      "enum": ["vector", "raster", "3d", "app", "dem", "infra", "common", "automation"],
       "description": "The team that owns this deployment"
     },
     "gisDomain": {
