@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/MapColonies/labels-and-annotations/compare/v1.0.0...v1.0.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* add automation to schema ([9679f21](https://github.com/MapColonies/labels-and-annotations/commit/9679f21478c517ed2e36b5e021d93e65ad7d7128))
+
 ## [1.0.0](https://github.com/MapColonies/labels-and-annotations/compare/v0.8.0...v1.0.0) (2025-09-07)
 
 
