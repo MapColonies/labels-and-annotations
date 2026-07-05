@@ -1,6 +1,6 @@
 dependencies:
 - name: mclabels
   repository: file://../helm
-  version: 0.8.0
-digest: sha256:a661f1c33cde4cadb0b7e39463101b6b4e135cfc939521be83acc4b863d43779
-generated: "2025-09-04T19:57:22.958311881+03:00"
+  version: 1.0.1
+digest: sha256:f9edd958c12069237f29ce2244cb2b350a232140c7f151765dcc2682ab731a03
+generated: "2026-07-05T10:46:17.3497+03:00"
