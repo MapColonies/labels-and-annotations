@@ -4,6 +4,7 @@ tests:
     set:
       mclabels:
         environment: development
+        criticality: internal
         component: backend
         partOf: myApplication
         owner: infra
@@ -11,6 +12,9 @@ tests:
       - equal:
           path: metadata.labels["mapcolonies.io/environment"]
           value: development
+      - equal:
+          path: metadata.labels["mapcolonies.io/criticality"]
+          value: internal
       - equal:
           path: metadata.labels["mapcolonies.io/component"]
           value: backend
@@ -33,6 +37,7 @@ tests:
           environment: production
       mclabels:
         environment: development # This should override global.environment
+        criticality: internal
         component: backend 
         partOf: myApplication
         owner: vector
@@ -40,6 +45,9 @@ tests:
       - equal:
           path: metadata.labels["mapcolonies.io/environment"]
           value: development # Local overrides global
+      - equal:
+          path: metadata.labels["mapcolonies.io/criticality"]
+          value: internal
       - equal:
           path: metadata.labels["mapcolonies.io/component"]
           value: backend
@@ -54,6 +62,7 @@ tests:
     set:
       mclabels:
         environment: stage
+        criticality: customer
         component: frontend
         partOf: anotherApp
         owner: raster
@@ -62,6 +71,9 @@ tests:
       - equal:
           path: metadata.labels["mapcolonies.io/environment"]
           value: stage
+      - equal:
+          path: metadata.labels["mapcolonies.io/criticality"]
+          value: customer
       - equal:
           path: metadata.labels["mapcolonies.io/component"]
           value: frontend
@@ -78,6 +90,7 @@ tests:
   - it: Should set environment to undefined when not provided
     set:
       mclabels:
+        criticality: internal
         component: frontend
         partOf: anotherApp
         owner: raster
@@ -98,6 +111,7 @@ tests:
   - it: Should set log scraping label when enabled
     set:
       mclabels:
+        criticality: internal
         component: frontend
         partOf: avi
         owner: infra

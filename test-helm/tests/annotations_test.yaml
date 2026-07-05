@@ -4,6 +4,7 @@ tests:
     set:
       mclabels:
         environment: development
+        criticality: internal
         component: backend
         partOf: myApplication
         owner: infra
@@ -17,6 +18,7 @@ tests:
     set:
       mclabels:
         environment: development
+        criticality: internal
         component: backend
         partOf: myApplication
         owner: infra
@@ -40,6 +42,7 @@ tests:
     set:
       mclabels:
         environment: development
+        criticality: internal
         component: backend
         partOf: myApplication
         owner: infra
