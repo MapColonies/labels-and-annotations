@@ -73,6 +73,7 @@ global:
 
 mclabels:
   environment: "stage" # Overrides global.mclabels.environment
+  criticality: "internal"
   owner: "3d"
   prometheus:
     enabled: true
@@ -86,6 +87,7 @@ The chart validates the following metadata fields:
 | Field              | Required | Valid Values                                                            | Default | Notes |
 |--------------------|----------|----------------|----|----|
 | environment        | No       | development, production, stage                                          | - | Can be set globally or locally |
+| criticality        | Yes      | internal, customer                                                      | - | Deployment criticality classification |
 | component          | Yes      | frontend, backend, database, proxy-server, cache-server, infrastructure | - | |
 | partOf             | Yes      | non-empty string                                                        | - | |
 | owner              | Yes      | vector, raster, 3d, app, dem, infra, common                             | - | Who is the owner of the deployment |

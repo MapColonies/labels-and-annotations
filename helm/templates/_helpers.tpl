@@ -9,6 +9,7 @@ Create common labels for all kubernetes components
 */}}
 {{- define "mclabels.labels" -}}
 mapcolonies.io/environment: {{ include "environmentMerged" . }}
+mapcolonies.io/criticality: {{ .Values.mclabels.criticality }}
 mapcolonies.io/part-of: {{ .Values.mclabels.partOf }}
 mapcolonies.io/owner: {{ .Values.mclabels.owner }}
 mapcolonies.io/component: {{ .Values.mclabels.component }}

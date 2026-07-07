@@ -3,74 +3,103 @@ tests:
   - it: Should fail if partOf is missing
     set:
       mclabels:
+        criticality: internal
         component: backend
         owner: infra
     asserts:
       - failedTemplate:
-          errorPattern: "partOf is required"
+          errorPattern: "missing property 'partOf'"
 
   - it: Should fail if owner is missing
     set:
       mclabels:
+        criticality: internal
         component: backend
         partOf: myApplication
     asserts:
       - failedTemplate:
-          errorPattern: "owner is required"
+          errorPattern: "missing property 'owner'"
 
   - it: Should fail if component is missing
     set:
       mclabels:
+        criticality: internal
         partOf: myApplication
         owner: infra
     asserts:
       - failedTemplate:
-          errorPattern: "component is required"
+          errorPattern: "missing property 'component'"
+
+  - it: Should fail if criticality is missing
+    set:
+      mclabels:
+        component: backend
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - failedTemplate:
+          errorPattern: "missing property 'criticality'"
 
   - it: Should fail for invalid environment value
     set:
       mclabels:
         environment: "invalid-env"
+        criticality: internal
         component: backend
         partOf: myApplication
         owner: infra
     asserts:
       - failedTemplate:
-          errorPattern: 'environment must be one of the following: "development", "stage", "production"'
+          errorPattern: "value must be one of 'development', 'stage', 'production'"
 
   - it: Should fail for invalid component value
     set:
       mclabels:
         environment: development
+        criticality: internal
         component: "invalid-component"
         partOf: myApplication
         owner: infra
     asserts:
       - failedTemplate:
-          errorPattern: 'component must be one of the following: "frontend", "backend", "database", "proxy-server", "cache-server", "infrastructure"'
+          errorPattern: "value must be one of 'frontend', 'backend', 'database', 'proxy-server', 'cache-server', 'infrastructure'"
 
   - it: Should fail for invalid owner value
     set:
       mclabels:
         environment: development
+        criticality: internal
         component: backend
         partOf: myApplication
         owner: "invalid-owner"
     asserts:
       - failedTemplate:
-          errorPattern: 'owner must be one of the following: "vector", "raster", "3d", "app", "dem", "infra", "common"'
+          errorPattern: "value must be one of 'vector', 'raster', '3d', 'app', 'dem', 'infra', 'common', 'automation'"
+
+  - it: Should fail for invalid criticality value
+    set:
+      mclabels:
+        environment: development
+        criticality: "invalid-criticality"
+        component: backend
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - failedTemplate:
+          errorPattern: "value must be one of 'internal', 'customer'"
 
   - it: Should fail for invalid gisDomain value
     set:
       mclabels:
         environment: development
+        criticality: internal
         component: backend
         partOf: myApplication
         owner: infra
         gisDomain: "invalid-gis"
     asserts:
-      - failedTemplate: 
-          errorPattern: 'gisDomain must be one of the following: "vector", "raster", "3d", "dem", "terrain-analysis"'
+      - failedTemplate:
+          errorPattern: "value must be one of 'vector', 'raster', '3d', 'dem', 'terrain-analysis'"
 
   - it: Should fail if mclabels is missing locally AND globally
     set:

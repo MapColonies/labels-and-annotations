@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "title": "Values Schema for MapColonies Labels and Annotations",
-  "required": ["component", "partOf", "owner"],
+  "required": ["component", "criticality", "partOf", "owner"],
   "properties": {
     "environment": {
       "type": "string",
@@ -20,6 +20,11 @@
         "infrastructure"
       ],
       "description": "The component type"
+    },
+    "criticality": {
+      "type": "string",
+      "enum": ["internal", "customer"],
+      "description": "The deployment criticality classification"
     },
     "partOf": {
       "type": "string",
