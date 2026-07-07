@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/MapColonies/labels-and-annotations/compare/v1.0.1...v1.1.0) (2026-07-07)
+
+
+### Features
+
+* add criticality label and validation to mclabels ([88a6180](https://github.com/MapColonies/labels-and-annotations/commit/88a6180548fd585357407acfe63bfbb12156f380))
+* add criticality label and validation to mclabels ([a351e9e](https://github.com/MapColonies/labels-and-annotations/commit/a351e9e50db6e3b0c8bddeea34a7e88497a5ea7e))
+* add criticality label and validation to mclabels ([ee83607](https://github.com/MapColonies/labels-and-annotations/commit/ee83607d6bcc14a8f1051768b08d7644cf7feba4))
+
+
+### Bug Fixes
+
+* add skip verification on plugin ([9a02e2a](https://github.com/MapColonies/labels-and-annotations/commit/9a02e2a9fd39ed801d891e3afd774afca673b7c2))
+
 ## [1.0.1](https://github.com/MapColonies/labels-and-annotations/compare/v1.0.0...v1.0.1) (2025-09-10)
 
 
