@@ -107,4 +107,78 @@ tests:
       # mclabels: {} # Intentionally missing locally
     asserts:
       - failedTemplate:
-          errorPattern: "values don't meet the specifications of the schema"
+          errorPattern: "missing property 'component'"
+
+  - it: Should fail if partOf is empty
+    set:
+      mclabels:
+        criticality: internal
+        component: backend
+        partOf: ""
+        owner: infra
+    asserts:
+      - failedTemplate:
+          errorPattern: "missing property 'partOf'"
+
+  - it: Should list every invalid value in one error
+    set:
+      mclabels:
+        criticality: internal
+        component: "invalid-component"
+        partOf: myApplication
+    asserts:
+      - failedTemplate:
+          errorPattern: "missing property 'owner'\\n- at '/component': value must be one of"
+
+  - it: Should fail for non-boolean logScraping
+    set:
+      mclabels:
+        criticality: internal
+        component: backend
+        partOf: myApplication
+        owner: infra
+        logScraping: "yes"
+    asserts:
+      - failedTemplate:
+          errorPattern: "at '/logScraping': must be a boolean"
+
+  - it: Should fail if prometheus.enabled is missing
+    set:
+      mclabels:
+        criticality: internal
+        component: backend
+        partOf: myApplication
+        owner: infra
+        prometheus:
+          port: 8080
+    asserts:
+      - failedTemplate:
+          errorPattern: "at '/prometheus': missing property 'enabled'"
+
+  - it: Should fail for out-of-range prometheus.port
+    set:
+      mclabels:
+        criticality: internal
+        component: backend
+        partOf: myApplication
+        owner: infra
+        prometheus:
+          enabled: true
+          port: 70000
+    asserts:
+      - failedTemplate:
+          errorPattern: "at '/prometheus/port': must be an integer between 1 and 65535"
+
+  - it: Should fail for prometheus.path without leading slash
+    set:
+      mclabels:
+        criticality: internal
+        component: backend
+        partOf: myApplication
+        owner: infra
+        prometheus:
+          enabled: true
+          path: metrics
+    asserts:
+      - failedTemplate:
+          errorPattern: "at '/prometheus/path': must be a string starting with '/'"

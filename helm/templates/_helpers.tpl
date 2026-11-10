@@ -8,6 +8,7 @@ Create common labels for all kubernetes components
 Create common labels for all kubernetes components
 */}}
 {{- define "mclabels.labels" -}}
+{{- include "mclabels.validate" . -}}
 mapcolonies.io/environment: {{ include "environmentMerged" . }}
 mapcolonies.io/criticality: {{ .Values.mclabels.criticality }}
 mapcolonies.io/part-of: {{ .Values.mclabels.partOf }}
@@ -23,6 +24,7 @@ mapcolonies.io/gis-domain: {{ .Values.mclabels.gisDomain }}
 Create common annotations for all kubernetes components
 */}}
 {{- define "mclabels.annotations" -}}
+{{- include "mclabels.validate" . -}}
 {{- if and (hasKey .Values.mclabels "prometheus") .Values.mclabels.prometheus.enabled }}
 prometheus.io/scrape: "true"
 prometheus.io/port: {{ coalesce .Values.mclabels.prometheus.port "8080" | quote }}

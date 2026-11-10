@@ -5,7 +5,7 @@ This Helm chart provides MapColonies predefined labels and annotations through h
 ## Features
 - Standardized MapColonies labels and annotations
 - Global and local metadata configuration
-- Built-in schema-based validation for metadata values
+- Built-in validation for metadata values, with errors that name the chart that includes the library
 - Helm template helpers for easy integration
 
 ## Installation
@@ -90,7 +90,7 @@ The chart validates the following metadata fields:
 | criticality        | Yes      | internal, customer                                                      | - | Deployment criticality classification |
 | component          | Yes      | frontend, backend, database, proxy-server, cache-server, infrastructure | - | |
 | partOf             | Yes      | non-empty string                                                        | - | |
-| owner              | Yes      | vector, raster, 3d, app, dem, infra, common                             | - | Who is the owner of the deployment |
+| owner              | Yes      | vector, raster, 3d, app, dem, infra, common, automation                 | - | Who is the owner of the deployment |
 | gisDomain          | No       | vector, raster, 3d, dem, terrain-analysis                               | - | To what GIS domain it is related |
 | prometheus.enabled | No       | boolean | false | Whether to enable metrics annotations |
 | prometheus.port    | No       | port number | 8080 | The port on which the metrics are exposed |
@@ -102,13 +102,14 @@ The chart validates the following metadata fields:
 ### File Structure
 - `templates/_helpers.tpl`: Contains helper functions for generating labels and annotations.
 - `templates/_setValues.tpl`: Contains functions for merging and setting mclabels values.
+- `templates/_validations.tpl`: Validates mclabels values; called by the labels and annotations helpers.
 
 ### Adding New Labels Or Annotations
 1. Add the labels or annotations in `templates/_helpers.tpl`.
 
 ### Adding New Validations
-1. Define valid values in `templates/_setValues.tpl`.
-2. Add validation logic in `templates/_validations.tpl`.
+1. Add the check to `mclabels.validate` in `templates/_validations.tpl`.
+2. Add a case to `test-helm/tests/validations_test.yaml`.
 
 ## Migrations
 
