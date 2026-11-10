@@ -5,7 +5,7 @@ This Helm chart provides MapColonies predefined labels and annotations through h
 ## Features
 - Standardized MapColonies labels and annotations
 - Global and local metadata configuration
-- Built-in validation for metadata values, with errors that name the chart that includes the library
+- Built-in validation for metadata values, with errors that name the chart that includes mclabels, checked in every chart that includes it
 - Helm template helpers for easy integration
 
 ## Installation
@@ -103,6 +103,7 @@ The chart validates the following metadata fields:
 - `templates/_helpers.tpl`: Contains helper functions for generating labels and annotations.
 - `templates/_setValues.tpl`: Contains functions for merging and setting mclabels values.
 - `templates/_validations.tpl`: Validates mclabels values; called by the labels and annotations helpers.
+- `templates/validate.yaml`: Runs the same checks in every chart that includes mclabels and renders nothing. This is why the chart is `type: application`, not `library`: Helm never renders templates in a library chart.
 - `values.schema.json`: Editor completion hints only. It has no `type`, `enum` or `required`, so Helm never fails on it.
 
 ### Adding New Labels Or Annotations

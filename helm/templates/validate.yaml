@@ -1,0 +1,4 @@
+{{- /* Checks every chart that includes mclabels, even one that never calls the helpers. Skipped when no mclabels values are set. */ -}}
+{{- if omit .Values "global" -}}
+{{- include "mclabels.validate" (dict "Values" (dict "mclabels" .Values)) -}}
+{{- end -}}

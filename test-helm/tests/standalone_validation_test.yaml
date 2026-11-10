@@ -1,0 +1,30 @@
+suite: test validation in charts that don't call the helpers
+templates:
+  - charts/mclabels/templates/validate.yaml
+tests:
+  - it: Should fail for invalid values
+    set:
+      mclabels:
+        criticality: internal
+        component: backend
+        partOf: myApplication
+        owner: "invalid-owner"
+    asserts:
+      - failedTemplate:
+          errorPattern: "at '/owner': value must be one of"
+
+  - it: Should render nothing for valid values
+    set:
+      mclabels:
+        criticality: internal
+        component: backend
+        partOf: myApplication
+        owner: infra
+    asserts:
+      - hasDocuments:
+          count: 0
+
+  - it: Should skip the check when no mclabels values are set
+    asserts:
+      - hasDocuments:
+          count: 0

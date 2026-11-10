@@ -1,4 +1,6 @@
 suite: test labels
+templates:
+  - templates/deployment.yaml
 tests:
   - it: Should render labels correctly
     set:
