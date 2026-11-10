@@ -103,6 +103,7 @@ The chart validates the following metadata fields:
 - `templates/_helpers.tpl`: Contains helper functions for generating labels and annotations.
 - `templates/_setValues.tpl`: Contains functions for merging and setting mclabels values.
 - `templates/_validations.tpl`: Validates mclabels values; called by the labels and annotations helpers.
+- `values.schema.json`: Editor completion hints only. It has no `type`, `enum` or `required`, so Helm never fails on it.
 
 ### Adding New Labels Or Annotations
 1. Add the labels or annotations in `templates/_helpers.tpl`.
@@ -110,6 +111,7 @@ The chart validates the following metadata fields:
 ### Adding New Validations
 1. Add the check to `mclabels.validate` in `templates/_validations.tpl`.
 2. Add a case to `test-helm/tests/validations_test.yaml`.
+3. For a new field or allowed value, add it to `values.schema.json` as a `description` and `examples`, not as `type`, `enum` or `required`.
 
 ## Migrations
 

@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Editor hints only: no type, enum or required, because Helm reports a schema failure under the bare subchart name. Values are validated in templates/_validations.tpl.",
+  "title": "Values Schema for MapColonies Labels and Annotations",
+  "properties": {
+    "environment": {
+      "description": "The environment in which the deployment is running",
+      "examples": ["development", "stage", "production"]
+    },
+    "component": {
+      "description": "The component type (required)",
+      "examples": ["frontend", "backend", "database", "proxy-server", "cache-server", "infrastructure"]
+    },
+    "criticality": {
+      "description": "The deployment criticality classification (required)",
+      "examples": ["internal", "customer"]
+    },
+    "partOf": {
+      "description": "The system this deployment is part of (required)"
+    },
+    "owner": {
+      "description": "The team that owns this deployment (required)",
+      "examples": ["vector", "raster", "3d", "app", "dem", "infra", "common", "automation"]
+    },
+    "gisDomain": {
+      "description": "The GIS domain this deployment relates to",
+      "examples": ["vector", "raster", "3d", "dem", "terrain-analysis"]
+    },
+    "prometheus": {
+      "properties": {
+        "enabled": {
+          "description": "Whether Prometheus metrics are enabled for this deployment (required when prometheus is set)",
+          "examples": [true, false]
+        },
+        "port": {
+          "description": "The port on which Prometheus metrics are exposed",
+          "examples": [8080]
+        },
+        "path": {
+          "description": "The path on which Prometheus metrics are exposed, starting with /",
+          "examples": ["/metrics"]
+        }
+      }
+    },
+    "logScraping": {
+      "description": "Whether to enable log scraping for this deployment",
+      "examples": [true, false]
+    }
+  }
+}
